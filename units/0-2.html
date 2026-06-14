@@ -1,0 +1,512 @@
+﻿    <div class="section active">
+
+      <div class="card">
+        <div class="card-label">第零章 · 工作流程</div>
+        <div class="card-title">2 種協作工作流程 · 2 Workflows</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>本單元呈現 4 個角色如何在<strong>實際業務流程</strong>中互動。第一個流程是「一般流程」（從詢價到付款），第二個是「月底預提流程」——這就是 AP Accrual 功能要解決的關鍵時刻。</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>This unit shows how the 4 roles collaborate in actual business flows. The first is the Normal Flow (RFQ to payment). The second is Month-End Accrual — exactly what AP Accrual is designed to solve.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ WORKFLOW 1: 一般流程 ═══ -->
+      <div class="card">
+        <div class="card-label">Workflow 1</div>
+        <div class="card-title">📦 一般流程 · Normal Flow</div>
+      </div>
+
+      <div class="wf-phase-label">Phase A · 詢價與報價 · Inquiry &amp; Quotation</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head cust">
+          <div class="wf-no">1</div>
+          <div>
+            <div class="wf-actor">🏭 出口商 Exporter</div>
+            <div class="wf-action">發出詢價</div>
+            <div class="wf-action-en">Send RFQ — Request for Quotation</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>「我有 5 個貨櫃要從高雄運到洛杉磯，5 月出貨，請報價。」</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>"I have 5 containers from Kaohsiung to LA, shipping in May — please quote."</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head ops">
+          <div class="wf-no">2</div>
+          <div>
+            <div class="wf-actor">👷 業務／操作員 Ops</div>
+            <div class="wf-action">建立報價單 Quotation</div>
+            <div class="wf-action-en">Create Quotation</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>查詢費率，建立報價單，發送 PDF 給出口商確認。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Check carrier rates, create Quotation in GoFreight, send PDF for approval.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head cust">
+          <div class="wf-no">3</div>
+          <div>
+            <div class="wf-actor">🏭 出口商 Exporter</div>
+            <div class="wf-action">確認報價</div>
+            <div class="wf-action-en">Confirm Quote</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>接受報價，提供 Packing List 等出口文件，正式下訂。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Accept the quote, provide Packing List and Commercial Invoice. Job confirmed.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Phase B · 訂艙與 Draft AP · Booking</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head ops">
+          <div class="wf-no">4</div>
+          <div>
+            <div class="wf-actor">👷 業務／操作員 Ops</div>
+            <div class="wf-action">訂艙＋建立 Shipment</div>
+            <div class="wf-action-en">Book Vessel + Create Shipment</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>向馬士基訂艙位，建立 Shipment 記錄，確定出發日期、船名、航線。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Book space with Maersk. Create Shipment record with departure date, vessel, route.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head ops">
+          <div class="wf-no">5</div>
+          <div>
+            <div class="wf-actor">👷 業務／操作員 Ops</div>
+            <div class="wf-action">建立 Draft AP（不過帳）</div>
+            <div class="wf-action-en">Create Draft AP — Does NOT Post</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>填入預估費用（海運費、卡車費、報關費）。<strong>不過帳——財報看不到。</strong></p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Enter estimated costs (ocean, trucking, customs). Does NOT post — invisible to reports.</p></div>
+          </div>
+          <div class="tip">⚠️ <strong>問題起點：</strong>費用義務已產生，但發票未到。損益表失真從這裡開始。</div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head boss">
+          <div class="wf-no">6</div>
+          <div>
+            <div class="wf-actor">👔 老闆／管理層 Mgmt</div>
+            <div class="wf-action">查看 Dashboard（毛利虛高）</div>
+            <div class="wf-action-en">Review Dashboard — Profit Overstated</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>如果老闆此時查看每票貨毛利，看到的是<strong>假數字</strong>——費用還沒入帳。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>If management checks Profit per Shipment now, the figure is inflated — costs aren't on the books.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Phase C · 運輸途中（空窗期）· In Transit</div>
+
+      <div class="problem-card">
+        ⚠️ <strong>空窗期：</strong>貨物裝船後到供應商發票到達前，可能長達 2–4 週。費用完全不在帳上，財報嚴重失真。<strong>這是整個案例的核心問題。</strong>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head ops">
+          <div class="wf-no">7</div>
+          <div>
+            <div class="wf-actor">👷 業務／操作員 Ops</div>
+            <div class="wf-action">追蹤貨物狀態</div>
+            <div class="wf-action-en">Track Shipment Status</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>協調報關、追蹤船期、確認 ETA。財務狀態：Draft AP 仍不過帳，P&amp;L 費用欄空白。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Coordinate customs, monitor vessel, confirm ETA. Draft AP unposted. P&amp;L expense: empty.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">8</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">等待 Vendor Bill</div>
+            <div class="wf-action-en">Await Vendor Bill</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>等馬士基、卡車公司等各供應商的帳單到達。現行系統要求有實際帳單才能過帳。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Waiting for Vendor Bills from Maersk, truckers, etc. Current system requires actual bill to post.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head boss">
+          <div class="wf-no">9</div>
+          <div>
+            <div class="wf-actor">👔 老闆／管理層 Mgmt</div>
+            <div class="wf-action">看 P&amp;L（數字失真）</div>
+            <div class="wf-action-en">Review P&amp;L — Distorted</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>若月底在此期間，月度損益表費用嚴重低估，老闆<strong>最容易做錯誤決策</strong>。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>If month-end falls here, expenses are severely understated. Highest risk of bad decisions.</p></div>
+          </div>
+          <div class="tip">⚠️ <strong>後果：</strong>報價策略誤判、資金規劃錯誤、誤以為公司盈利而增加支出。</div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Phase D · 交付與收款 · Delivery</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head ops">
+          <div class="wf-no">10</div>
+          <div>
+            <div class="wf-actor">👷 業務／操作員 Ops</div>
+            <div class="wf-action">確認貨物到港交付</div>
+            <div class="wf-action-en">Confirm Cargo Delivered</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>確認洛杉磯交付成功，通知財務開立 Invoice。服務完成是<strong>開立發票的觸發點</strong>。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Confirm cargo delivered. Notify finance to issue Invoice. Service completion triggers invoicing.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">11</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">開發票 → A/R 入帳</div>
+            <div class="wf-action-en">Issue Invoice → A/R Created</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>開立運費 Invoice USD 3,500 給出口商。A/R 應收帳款產生，P&amp;L 收入入帳。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Issue freight Invoice USD 3,500. A/R created. Revenue posts to P&amp;L.</p></div>
+          </div>
+          <div class="tip">⚠️ 收入 ✓ 費用 ✗ → 毛利虛高。供應商帳單可能還沒到。</div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head cust">
+          <div class="wf-no">12</div>
+          <div>
+            <div class="wf-actor">🏭 出口商 Exporter</div>
+            <div class="wf-action">收到發票（Net 30）</div>
+            <div class="wf-action-en">Receive Invoice → Pay</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>核對發票與報價一致後，30 天內安排付款給貨代。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Verify Invoice matches Quotation, arrange payment within Net 30 days.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Phase E · 過帳 · Post AP</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">13</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">收到 Vendor Bill → 核對</div>
+            <div class="wf-action-en">Receive Vendor Bill → Match</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>馬士基帳單到了。核對實際 USD 2,150 vs 預估 USD 2,000。差額 USD 150 需要決定處理方式。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Maersk Vendor Bill arrives. Actual USD 2,150 vs estimate USD 2,000. USD 150 variance to resolve.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">14</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">Post AP → 費用進總帳</div>
+            <div class="wf-action-en">Post AP → Expense Enters GL</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>確認金額後按 Post，費用正式進總帳。P&amp;L 費用入帳，A/P 更新。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Verify amount, click Post. Expense enters GL. P&amp;L updates. A/P balance increases.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head boss">
+          <div class="wf-no">15</div>
+          <div>
+            <div class="wf-actor">👔 老闆／管理層 Mgmt</div>
+            <div class="wf-action">查看真實毛利</div>
+            <div class="wf-action-en">Review Actual Profit</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>所有費用過帳後，毛利才是真實數字。收入 3,500，費用 2,600，毛利 900。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>After all costs post, profit is finally accurate. Revenue 3,500, costs 2,600, profit 900.</p></div>
+          </div>
+          <div class="tip">⚠️ 但此時可能已是<strong>下個月</strong>了。費用進了「錯誤月份」的 P&amp;L。AP Accrual 解決這個問題。</div>
+        </div>
+      </div>
+
+      <div class="outcome-card ops">
+        <div class="outcome-label">Workflow 1 的核心問題</div>
+        <div class="outcome-text">整個流程走完財務數字才準確——但往往已是下個月。空窗期（第 7–9 步）讓老闆看到假數字，財務無法在月底做出準確財報。<strong>這就是 AP Accrual 要解決的根本問題</strong>。
+          <em>The process works, but accurate financials only emerge weeks later. The gap period (Steps 7–9) gives management false numbers. AP Accrual bridges this gap.</em>
+        </div>
+      </div>
+
+      <!-- ═══ WORKFLOW 2: 月底預提流程 ═══ -->
+      <div class="card" style="margin-top:24px">
+        <div class="card-label">Workflow 2</div>
+        <div class="card-title">📅 月底預提流程 · Month-End Accrual</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>每月底，財務需要對「還沒收到發票但貨已出」的貨件做 AP Accrual，才能讓月度損益表準確。</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>At month-end, finance must book AP Accruals for shipments where cargo departed but invoices haven't arrived, to close the month accurately.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Step 1 · 月底前：確認缺發票貨件</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head ops">
+          <div class="wf-no">1</div>
+          <div>
+            <div class="wf-actor">👷 業務／操作員 Ops</div>
+            <div class="wf-action">回報缺發票貨件清單</div>
+            <div class="wf-action-en">Report Shipments Missing Invoices</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>月底前確認哪些本月出貨的貨件仍有 Draft AP 未收到供應商發票。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Identify which shipments still have Draft APs with no vendor invoice received.</p></div>
+          </div>
+          <div class="tip">⚠️ <strong>現況：</strong>每月 200+ 票，財務用試算表手動標記，非常容易漏。</div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">2</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">確認預提清單</div>
+            <div class="wf-action-en">Confirm Accrual List</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>財務核對清單，確認哪些 Draft AP 需要做預提（估費用已知但發票未到）。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Finance reviews and confirms which Draft APs require accrual treatment.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Step 2 · 月底：建立 Accrual 分錄</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">3</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">建立預提 Journal Entry</div>
+            <div class="wf-action-en">Book Accrual JE</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>對每個缺發票貨件，用 Draft AP 預估金額建立 JE：<br>借：費用科目（P&amp;L 費用增加）<br>貸：Accrued Liability（負債增加）</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>For each missing-invoice shipment, create JE:<br>Debit: Expense account (P&amp;L)<br>Credit: Accrued Liability (Balance Sheet)</p></div>
+          </div>
+          <div class="tip">⭐ <strong>GAAP 要求：</strong>1 月海運費必須進 1 月 P&amp;L，不能等 2 月發票到。</div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head boss">
+          <div class="wf-no">4</div>
+          <div>
+            <div class="wf-actor">👔 老闆／管理層 Mgmt</div>
+            <div class="wf-action">查看準確的月度 P&amp;L</div>
+            <div class="wf-action-en">Review Accurate Monthly P&amp;L</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>預提過帳後 P&amp;L 費用欄完整，老闆看到接近真實的月度損益。<strong>可以用準確數字做業務決策</strong>。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>After accruals post, P&amp;L is complete. Management sees accurate monthly P&amp;L. Decisions based on real numbers.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">5</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">月結 → Trial Balance → 輸出財報</div>
+            <div class="wf-action-en">Period Close → Trial Balance → Reports</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>確認 Trial Balance 借貸平衡，輸出 P&amp;L 和 Balance Sheet 給老闆和審計師。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Verify Trial Balance balanced, generate P&amp;L and Balance Sheet for management and auditors.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Step 3 · 月初：自動反轉</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">6</div>
+          <div>
+            <div class="wf-actor">🧾 系統自動 / Auto</div>
+            <div class="wf-action">反轉預提分錄</div>
+            <div class="wf-action-en">Reverse Accrual</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>新月份第一天建立反向 JE 沖回上個月預提：<br>借：Accrued Liability<br>貸：費用科目</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Day 1 of new month, post reverse JE:<br>Debit: Accrued Liability<br>Credit: Expense account</p></div>
+          </div>
+          <div class="tip">💡 預估是暫時的。反轉後等實際發票過帳，確保<strong>費用只計算一次</strong>。</div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">7</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">等待實際 Vendor Bill</div>
+            <div class="wf-action-en">Await Actual Vendor Bill</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>繼續等馬士基、卡車公司等的實際發票。Accrued Liability 此時已歸零（被反轉）。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Continue waiting for actual Vendor Bills. Accrued Liability has been cleared by reversal.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-phase-label">Step 4 · Vendor Bill 到達 → 過帳</div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">8</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">核對差異</div>
+            <div class="wf-action-en">Match Vendor Bill vs. Estimate</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>馬士基發票到了。核對實際 USD 2,150 vs 預估 USD 2,000。差額 USD 150 需要決定處理方式。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Maersk invoice arrives. Match actual USD 2,150 vs estimated USD 2,000. USD 150 variance.</p></div>
+          </div>
+          <div class="tip">⚠️ <strong>Edge Case 核心：</strong>差額怎麼處理？直接更新 P&amp;L？建差異分錄？這是最容易被忽略的設計決策。</div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head acct">
+          <div class="wf-no">9</div>
+          <div>
+            <div class="wf-actor">🧾 財務會計 Accountant</div>
+            <div class="wf-action">正式過帳 → 費用進總帳</div>
+            <div class="wf-action-en">Post Actual AP</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>過帳實際 Vendor Bill，費用以實際金額入 GL，永久取代預提估算。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Post actual Vendor Bill. Real cost enters GL at actual amount, permanently replacing the accrual estimate.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-step">
+        <div class="wf-step-head boss">
+          <div class="wf-no">10</div>
+          <div>
+            <div class="wf-actor">👔 老闆／管理層 Mgmt</div>
+            <div class="wf-action">查看真實毛利＋稽核軌跡</div>
+            <div class="wf-action-en">Review Actual Profit + Audit Trail</div>
+          </div>
+        </div>
+        <div class="wf-body">
+          <div class="bilingual">
+            <div class="lang-block zh"><div class="lang-tag">中文</div><p>每票貨毛利以實際費用更新，老闆和審計師可以看到完整稽核軌跡：<strong>預估 → 預提 → 反轉 → 實際過帳</strong>。</p></div>
+            <div class="lang-block en"><div class="lang-tag">English</div><p>Profit per Shipment updates. Full audit trail visible: Estimate → Accrual → Reversal → Actual Post.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="outcome-card acct">
+        <div class="outcome-label">Accrual 流程解決了什麼</div>
+        <div class="outcome-text">
+          <strong>Customer A：</strong>200+ 票手動試算表 → 系統自動識別缺發票貨件並建立預提。<br>
+          <strong>Customer B：</strong>法規合規 + 完整稽核軌跡（估計→預提→反轉→實際）。<br>
+          <strong>Customer C：</strong>費用在正確月份出現，老闆不再被假毛利誤導。
+          <em>Eliminates manual Excel entries, ensures GAAP compliance with full audit trail, and places costs in the correct accounting period.</em>
+        </div>
+      </div>
+
+    </div>

@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>初級會計學 · Accounting 101</title>
+<style>
+/* ── ROOT TOKENS ── */
+:root {
+  --bg:            #F7F8FA;
+  --bg-card:       #FFFFFF;
+  --bg-blue:       #EBF3FF;
+  --bg-green:      #EDFAF3;
+  --bg-amber:      #FFF8E6;
+  --accent:        #1A5EBF;
+  --accent-dark:   #0D3D82;
+  --accent-light:  #D0E4FF;
+  --green:         #0D7A4A;
+  --green-light:   #C8F0DC;
+  --amber:         #9A5F00;
+  --text-primary:  #0F1923;
+  --text-sec:      #3D5066;
+  --text-muted:    #6B7F95;
+  --border:        #C8D4E0;
+  --border-lt:     #E2EAF2;
+  --correct:       #0D7A4A;
+  --correct-bg:    #EDFAF3;
+  --correct-bdr:   #52C896;
+  --wrong:         #B81C1C;
+  --wrong-bg:      #FEF0F0;
+  --wrong-bdr:     #F08080;
+  --drawer-w:      272px;
+  --radius:        12px;
+  --radius-sm:     8px;
+  --tabbar-h:      44px;
+  /* safe-area */
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+/* ── RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+html { -webkit-text-size-adjust: 100%; }
+html, body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: -apple-system, 'Helvetica Neue', Arial, 'PingFang TC', 'Noto Sans TC', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100dvh;
+  overflow-x: clip;
+}
+
+/* ── OVERLAY ── */
+#overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(8,18,36,.5); z-index: 200;
+  opacity: 0; transition: opacity .22s;
+}
+#overlay.open { display: block; opacity: 1; }
+
+/* ── DRAWER ── */
+#drawer {
+  position: fixed; top: 0; left: 0;
+  height: 100dvh; width: var(--drawer-w);
+  background: #0A2A5E;
+  z-index: 201;
+  transform: translateX(-100%);
+  transition: transform .26s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+  padding-left: var(--sal);
+}
+#drawer.open { transform: translateX(0); }
+
+.drawer-head {
+  padding: calc(20px + var(--sat)) 16px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  flex-shrink: 0;
+}
+.drawer-logo {
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  color: rgba(160,195,255,.75); margin-bottom: 5px;
+  text-transform: uppercase;
+}
+.drawer-title { font-size: 15px; font-weight: 800; color: #FFF; line-height: 1.35; }
+.drawer-sub   { font-size: 11px; color: rgba(160,195,255,.65); margin-top: 3px; }
+
+.drawer-body { flex: 1; overflow-y: auto; padding: 8px 0 calc(16px + var(--sab)); }
+.chapter-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase;
+  color: rgba(140,175,255,.55);
+  padding: 16px 16px 5px;
+}
+
+.unit-btn {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 10px 14px;
+  background: none; border: none;
+  color: rgba(210,228,255,.8);
+  font-size: 13px; font-weight: 500;
+  text-align: left; cursor: pointer;
+  position: relative;
+  min-height: 52px; /* thumb-friendly */
+  transition: background .12s;
+}
+.unit-btn:active     { background: rgba(255,255,255,.07); }
+.unit-btn.active     { background: rgba(255,255,255,.13); color: #FFF; font-weight: 700; }
+.unit-btn.active::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: #5BA4FF; border-radius: 0 2px 2px 0;
+}
+.unit-btn.coming     { opacity: .5; cursor: default; }
+
+.unit-num {
+  width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  background: rgba(255,255,255,.1); color: rgba(200,220,255,.9);
+}
+.unit-btn.active .unit-num { background: rgba(255,255,255,.2); color: #FFF; }
+
+.unit-info { flex: 1; min-width: 0; }
+.unit-name-zh { font-size: 13px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.unit-name-en { font-size: 10px; color: rgba(155,190,255,.65); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.unit-btn.active .unit-name-en { color: rgba(190,215,255,.8); }
+
+.coming-pill {
+  flex-shrink: 0;
+  font-size: 9px; font-weight: 700; letter-spacing: .04em;
+  background: rgba(255,255,255,.08); color: rgba(155,190,255,.7);
+  padding: 2px 7px; border-radius: 20px;
+}
+
+/* ── APP HEADER ── */
+.app-header {
+  background: var(--accent);
+  padding: calc(var(--sat) + 8px) 16px 13px;
+  padding-left: calc(16px + var(--sal));
+  padding-right: calc(16px + var(--sar));
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: flex-end; gap: 12px;
+}
+.hamburger {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: rgba(255,255,255,.16); border: none; border-radius: 9px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 5px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block; width: 17px; height: 2px;
+  background: #FFF; border-radius: 1px;
+}
+.header-text { flex: 1; min-width: 0; }
+.header-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.18); color: #C8DCFF;
+  font-size: 10px; font-weight: 700; letter-spacing: .07em;
+  padding: 2px 9px; border-radius: 20px; margin-bottom: 5px;
+}
+.header-unit {
+  font-size: 15px; font-weight: 700; color: #FFF; line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.header-sub {
+  font-size: 11px; color: #A8C8FF; margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── TAB BAR ── */
+.tab-bar {
+  background: #FFF;
+  border-bottom: 1.5px solid var(--border-lt);
+  display: flex; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  position: sticky;
+  /* sticks right below the header — JS sets --header-h dynamically */
+  top: var(--header-h, 80px);
+  z-index: 99;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: 1;           /* equal-width tabs */
+  min-width: 0;
+  padding: 11px 8px;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-muted); background: none; border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer; white-space: nowrap;
+  transition: color .14s, border-color .14s;
+}
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── IFRAME UNIT: no margin/padding ── */
+#unit-0-1 { margin: -14px; width: calc(100% + 28px); }
+
+/* ── CONTENT ── */
+.content {
+  padding: 14px;
+  padding-bottom: calc(24px + var(--sab));
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── COMING SOON ── */
+.coming-screen {
+  min-height: 60vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 40px 20px;
+}
+.coming-icon  { font-size: 44px; margin-bottom: 14px; }
+.coming-title { font-size: 18px; font-weight: 800; color: var(--accent-dark); margin-bottom: 8px; }
+.coming-desc  { font-size: 13px; color: var(--text-sec); line-height: 1.65; }
+
+/* ── CARD ── */
+.card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-lt);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.card-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 7px;
+}
+.card-title { font-size: 15px; font-weight: 700; color: var(--accent-dark); margin-bottom: 10px; }
+
+/* ── BILINGUAL — stacks on 393, side-by-side ≥ 480 ── */
+.bilingual {
+  display: flex; flex-direction: column; gap: 8px;
+  margin: 8px 0;
+}
+@media (min-width: 480px) {
+  .bilingual { flex-direction: row; }
+  .bilingual .lang-block { flex: 1; }
+}
+.lang-block { padding: 10px 12px; border-radius: var(--radius-sm); }
+.lang-block.zh { background: var(--bg-blue);  border-left: 3px solid var(--accent); }
+.lang-block.en { background: var(--bg-green); border-left: 3px solid var(--green);  }
+.lang-tag { font-size: 10px; font-weight: 700; letter-spacing: .06em; margin-bottom: 4px; }
+.lang-block.zh .lang-tag { color: var(--accent); }
+.lang-block.en .lang-tag { color: var(--green);  }
+.lang-block p { font-size: 13px; line-height: 1.58; color: var(--text-primary); }
+
+/* ── TIP ── */
+.tip {
+  background: var(--bg-amber);
+  border-left: 3px solid #E8A400;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 10px 12px; margin-top: 10px;
+  font-size: 13px; color: var(--amber); line-height: 1.58;
+}
+.tip strong { color: #6B4200; }
+
+/* ── USER LIST ── */
+.user-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 9px 0; border-bottom: 1px solid var(--border-lt);
+}
+.user-item:last-child { border: none; }
+.user-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+.user-zh   { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.user-en   { font-size: 12px; color: var(--accent); font-weight: 500; margin-left: 4px; }
+.user-desc { font-size: 12px; color: var(--text-sec); margin-top: 1px; line-height: 1.45; }
+
+/* ── STEP LIST ── */
+.step-item {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 8px 0; border-bottom: 1px solid var(--border-lt);
+}
+.step-item:last-child { border: none; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); color: #FFF;
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-zh   { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.step-en   { font-size: 12px; color: var(--accent); font-weight: 500; margin-left: 4px; }
+.step-desc { font-size: 12px; color: var(--text-sec); margin-top: 1px; }
+
+/* ── SENTENCES ── */
+.sentence-card {
+  background: var(--bg-blue);
+  border: 1px solid var(--accent-light);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.sentence-en { font-size: 13px; font-weight: 600; color: var(--accent-dark); line-height: 1.45; }
+.sentence-zh { font-size: 12px; color: var(--text-sec); margin-top: 3px; }
+
+/* ── GLOSSARY — 2-col on mobile, 3-col ≥ 480 ── */
+.gloss-wrap {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-lt);
+  border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 12px;
+}
+/* mobile: 中文 | 英文 (no 說明 col — shown as sub-row) */
+.gloss-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 8px 12px;
+  background: var(--accent);
+  font-size: 11px; font-weight: 700; color: #C8DCFF; letter-spacing: .04em;
+}
+.gloss-header .col-desc { display: none; }
+.gloss-row {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border-lt);
+}
+.gloss-row:last-child { border: none; }
+.gloss-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.gloss-zh   { font-size: 13px; font-weight: 700; color: var(--accent-dark); }
+.gloss-en   { font-size: 12px; font-weight: 600; color: var(--green); }
+.gloss-desc { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+/* wide: restore 3-col */
+@media (min-width: 480px) {
+  .gloss-header          { grid-template-columns: 1fr 1.3fr 1.6fr; }
+  .gloss-header .col-desc{ display: block; }
+  .gloss-top             { grid-template-columns: 1fr 1.3fr 1.6fr; }
+  .gloss-desc            { margin-top: 0; }
+}
+
+/* ── FLOW ── */
+.flow-wrap { display: flex; flex-direction: column; align-items: center; }
+.flow-node {
+  background: var(--bg-blue);
+  border: 1.5px solid var(--accent-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 20px; text-align: center;
+  width: min(200px, 80%);
+}
+.flow-node.start, .flow-node.end { background: var(--accent); border-color: var(--accent-dark); }
+.flow-node.start .fz, .flow-node.end .fz { color: #FFF; }
+.flow-node.start .fe, .flow-node.end .fe { color: #A8C8FF; }
+.flow-node.result { background: var(--bg-green); border-color: var(--green-light); }
+.flow-node.result .fz { color: var(--green); }
+.flow-node.result .fe { color: #2BA86D; }
+.fz { font-size: 14px; font-weight: 700; color: var(--accent-dark); }
+.fe { font-size: 11px; color: var(--accent); margin-top: 1px; }
+.flow-arrow { font-size: 18px; color: var(--accent); line-height: 1; padding: 2px 0; }
+
+/* ── QUIZ ── */
+.score-banner {
+  background: var(--accent); border-radius: var(--radius);
+  padding: 12px 16px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+.score-label { font-size: 13px; color: #A8C8FF; font-weight: 500; }
+.score-val   { font-size: 22px; font-weight: 800; color: #FFF; }
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-lt);
+  border-radius: var(--radius);
+  padding: 14px; margin-bottom: 12px;
+}
+.q-num  { font-size: 10px; font-weight: 800; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; margin-bottom: 5px; }
+.q-text { font-size: 14px; font-weight: 600; color: var(--text-primary); line-height: 1.5; margin-bottom: 3px; }
+.q-sub  { font-size: 12px; color: var(--text-muted); margin-bottom: 11px; line-height: 1.4; }
+
+.opts { display: flex; flex-direction: column; gap: 7px; }
+.opt {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  font-size: 13px; color: var(--text-primary);
+  text-align: left; cursor: pointer; line-height: 1.45;
+  transition: border-color .12s, background .12s;
+  width: 100%;
+  /* ensure wraps, never overflows */
+  word-break: break-word;
+  -webkit-appearance: none;
+}
+.opt:active { background: var(--accent-light); }
+.opt.correct { background: var(--correct-bg) !important; border-color: var(--correct-bdr) !important; color: var(--correct) !important; font-weight: 600; }
+.opt.wrong   { background: var(--wrong-bg)   !important; border-color: var(--wrong-bdr)   !important; color: var(--wrong)   !important; }
+.opt.disabled { pointer-events: none; }
+.opt small { display: block; font-size: 11px; color: var(--text-muted); margin-top: 2px; font-weight: 400; }
+.opt.correct small { color: #2BA86D; }
+.opt.wrong   small { color: #C95050; }
+.opt.disabled.correct small { color: #2BA86D; }
+
+.explain {
+  display: none; margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--bg-blue);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 12px; color: var(--accent-dark); line-height: 1.55;
+}
+.explain.show { display: block; }
+.explain strong { font-weight: 700; }
+
+.reset-btn {
+  width: 100%; padding: 13px;
+  border: 1.5px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-card);
+  font-size: 14px; font-weight: 600; color: var(--text-sec);
+  cursor: pointer; margin-top: 4px;
+}
+.reset-btn:active { background: var(--bg-blue); }
+
+.footer {
+  text-align: center; font-size: 11px; color: var(--text-muted);
+  padding: 20px 0 6px;
+}
+
+/* ── CHAPTER 0 PURPLE HEADER ── */
+.app-header.ch0 { background: #5B3FA6; }
+.app-header.ch0 .header-badge { background: rgba(255,255,255,.18); color: #E8E0FA; }
+.app-header.ch0 .header-sub { color: #D8C8FF; }
+
+/* ── CH0 ROLE TAGS ── */
+.role-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-lt);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--accent);
+}
+.role-card.ops  { border-left-color: #1B3A6B; }
+.role-card.acct { border-left-color: #1A6B3A; }
+.role-card.boss { border-left-color: #6B1A3A; }
+.role-card.cust { border-left-color: #5B3FA6; }
+.role-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.role-emoji { font-size: 28px; flex-shrink: 0; }
+.role-name { font-size: 15px; font-weight: 700; color: var(--accent-dark); }
+.role-name.ops  { color: #1B3A6B; }
+.role-name.acct { color: #1A6B3A; }
+.role-name.boss { color: #6B1A3A; }
+.role-name.cust { color: #5B3FA6; }
+.role-en { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+.role-goal { font-size: 13px; color: var(--text-sec); line-height: 1.55; font-style: italic; }
+
+.problem-card {
+  background: #FFF8E6;
+  border-left: 3px solid #E8A400;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #6B4200;
+  line-height: 1.6;
+}
+.problem-card strong { color: #4A2D00; }
+
+/* phase header inside ch0 — coloured by role */
+.phase-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-lt);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.phase-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: var(--accent);
+}
+.phase-bar.ops  { background: #1B3A6B; }
+.phase-bar.acct { background: #1A6B3A; }
+.phase-bar.boss { background: #6B1A3A; }
+.phase-bar.cust { background: #5B3FA6; }
+.phase-no {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  color: #FFF;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; flex-shrink: 0;
+}
+.phase-titles { flex: 1; min-width: 0; }
+.phase-title-zh { font-size: 14px; font-weight: 700; color: #FFF; line-height: 1.3; }
+.phase-title-en { font-size: 11px; color: rgba(255,255,255,.75); margin-top: 1px; line-height: 1.3; }
+
+.phase-body { padding: 12px 14px; }
+
+.outcome-card {
+  background: var(--bg-blue);
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--accent);
+}
+.outcome-card.ops  { background: #EAF1FB; border-left-color: #1B3A6B; }
+.outcome-card.acct { background: #EAF7EE; border-left-color: #1A6B3A; }
+.outcome-card.boss { background: #FBEAF1; border-left-color: #6B1A3A; }
+.outcome-card.cust { background: #EFEAFB; border-left-color: #5B3FA6; }
+.outcome-label {
+  font-size: 10px; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 5px;
+}
+.outcome-text { font-size: 13px; color: var(--text-primary); line-height: 1.6; }
+.outcome-text em { color: var(--text-sec); display: block; margin-top: 6px; font-size: 12px; }
+
+/* connector arrow */
+.phase-arrow {
+  text-align: center;
+  font-size: 20px;
+  color: var(--border);
+  margin: -4px 0 0;
+  padding-bottom: 4px;
+}
+
+/* ── CH0 WORKFLOW STEP CARDS ── */
+.wf-step {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-lt);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.wf-step-head {
+  padding: 9px 12px;
+  display: flex; align-items: center; gap: 9px;
+  color: #FFF;
+}
+.wf-step-head.ops  { background: #1B3A6B; }
+.wf-step-head.acct { background: #1A6B3A; }
+.wf-step-head.boss { background: #6B1A3A; }
+.wf-step-head.cust { background: #5B3FA6; }
+.wf-no {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; flex-shrink: 0;
+}
+.wf-actor { font-size: 10px; color: rgba(255,255,255,.78); }
+.wf-action { font-size: 13px; font-weight: 700; line-height: 1.25; margin-top: 1px; }
+.wf-action-en { font-size: 11px; color: rgba(255,255,255,.72); margin-top: 1px; line-height: 1.3; }
+.wf-body { padding: 11px 13px; }
+
+.wf-phase-label {
+  font-size: 10px; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin: 16px 0 8px;
+  padding-top: 12px; border-top: 1px dashed var(--border-lt);
+}
+.wf-phase-label:first-child { margin-top: 0; padding-top: 0; border: none; }
+
+/* ── CH0 GLOSSARY ── */
+.gloss-search {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+}
+.gloss-search:focus { outline: none; border-color: var(--accent); }
+.cat-filter {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.cat-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-card);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-sec);
+  cursor: pointer;
+}
+.cat-btn.active { background: var(--accent); color: #FFF; border-color: var(--accent); }
+.term-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-lt);
+  border-radius: var(--radius);
+  padding: 11px 13px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.term-card.open { border-color: var(--accent); }
+.term-row {
+  display: flex; align-items: center; gap: 8px;
+}
+.term-titles { flex: 1; min-width: 0; }
+.term-en {
+  font-size: 14px; font-weight: 700; color: var(--accent-dark);
+  line-height: 1.3;
+}
+.term-zh {
+  font-size: 12px; color: var(--text-sec); margin-top: 1px;
+}
+.term-badges { display: flex; gap: 4px; flex-shrink: 0; flex-direction: column; align-items: flex-end; }
+.t-badge {
+  font-size: 9px; font-weight: 700;
+  padding: 2px 7px; border-radius: 20px;
+  white-space: nowrap;
+}
+.t-badge.high { background: #FCEBEB; color: #A32D2D; }
+.t-badge.mid  { background: #FAEEDA; color: #854F0B; }
+.t-badge.low  { background: #F1EFE8; color: #5F5E5A; }
+.t-cat {
+  font-size: 9px; font-weight: 700;
+  padding: 2px 7px; border-radius: 20px;
+}
+.t-cat.ap      { background: #EAF3DE; color: #3B6D11; }
+.t-cat.report  { background: #E6F1FB; color: #185FA5; }
+.t-cat.accrual { background: #EEEDFE; color: #534AB7; }
+.t-cat.process { background: #FAEEDA; color: #854F0B; }
+.term-chevron {
+  font-size: 16px; color: var(--text-muted);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.term-card.open .term-chevron { transform: rotate(180deg); }
+.term-body {
+  display: none;
+  margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid var(--border-lt);
+}
+.term-card.open .term-body { display: block; }
+.term-def {
+  background: var(--bg-blue);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 9px 11px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.55;
+}
+.term-def.en {
+  background: var(--bg-green);
+  border-left-color: var(--green);
+  color: var(--text-sec);
+  font-size: 12px;
+}
+.term-usage {
+  font-size: 12px;
+  color: var(--text-sec);
+  line-height: 1.55;
+  padding: 6px 0 0;
+}
+.term-usage strong { color: var(--accent-dark); font-weight: 700; }
+.no-results {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+
+<!-- OVERLAY -->
+<div id="overlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER -->
+<nav id="drawer" aria-label="課程目錄">
+  <div class="drawer-head">
+    <div class="drawer-logo">初級會計學 · Accounting 101</div>
+    <div class="drawer-title">Go Freight<br>會計入門課程</div>
+    <div class="drawer-sub">Accounting in Action</div>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</nav>
+
+<!-- HEADER -->
+<header class="app-header" id="app-header">
+  <button class="hamburger" onclick="openDrawer()" aria-label="開啟課程目錄">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="header-text">
+    <div class="header-badge" id="header-badge">第一章 · Chapter 1</div>
+    <div class="header-unit" id="header-unit">1-1 會計的意義及目的</div>
+    <div class="header-sub"  id="header-sub">Meaning &amp; Purpose of Accounting</div>
+  </div>
+</header>
+
+<!-- TAB BAR -->
+<div class="tab-bar" id="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('lesson',this)">📖 講義</button>
+  <button class="tab-btn"        onclick="switchTab('glossary',this)">📋 字彙</button>
+  <button class="tab-btn"        onclick="switchTab('flow',this)">🔄 流程</button>
+  <button class="tab-btn"        onclick="switchTab('quiz',this)">✏️ 練習</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content" id="main-content">
+
+
+
+
+  <!-- ══════════════ UNIT 1-1 ══════════════ -->
+  <div id="unit-1-1">
+
+    <!-- LESSON -->
+    <div class="section active" id="section-lesson">
+
+      <div class="card">
+        <div class="card-label">Part 1 · 何謂會計</div>
+        <div class="card-title">會計是什麼？What is Accounting?</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>會計是一套<strong>資訊系統</strong>，把公司金錢往來記下來，做成報表，讓相關人士用來做決定。</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>Accounting is an <strong>information system</strong> that records financial activities and presents them as reports for decision-making.</p>
+          </div>
+        </div>
+        <div class="tip">💡 <strong>白話版：</strong>就像手機記帳 App，但公司版、更正式。每筆進出都記下來，整理好讓老闆、股東、銀行都能看懂。</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Part 2 · 資訊使用者</div>
+        <div class="card-title">誰在用這些資訊？Users of Accounting Info</div>
+        <div class="user-item"><div class="user-dot"></div><div><div><span class="user-zh">企業管理階層</span><span class="user-en">Management</span></div><div class="user-desc">決定公司方向、要不要展店或裁員</div></div></div>
+        <div class="user-item"><div class="user-dot"></div><div><div><span class="user-zh">外部投資者</span><span class="user-en">External Investors</span></div><div class="user-desc">評估這家公司值不值得投資、買不買股票</div></div></div>
+        <div class="user-item"><div class="user-dot"></div><div><div><span class="user-zh">內部員工</span><span class="user-en">Employees</span></div><div class="user-desc">了解公司財務健不健康、工作穩不穩</div></div></div>
+        <div class="user-item"><div class="user-dot"></div><div><div><span class="user-zh">債權人</span><span class="user-en">Creditors</span></div><div class="user-desc">銀行或供應商，看公司有沒有能力還款</div></div></div>
+        <div class="user-item"><div class="user-dot"></div><div><div><span class="user-zh">政府機關</span><span class="user-en">Government Agencies</span></div><div class="user-desc">確認公司有沒有按規定繳稅、合法營運</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Part 3 · 何謂決策</div>
+        <div class="card-title">Decision Making 決策</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>在很多個可行的方案裡，<strong>選出最好的那一個</strong>去執行。</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>Selecting the <strong>best alternative</strong> from several possible options and acting on it.</p>
+          </div>
+        </div>
+        <div class="tip">💡 <strong>例子：</strong>公司有 100 萬，可以買設備、投資股票、或開新分店。管理層看會計報表，選最划算的那個。<br><br><em>Example: Company has NT$1M. Options: equipment / stocks / new branch → management reads accounting data and picks the best.</em></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Part 4 · 六大程序</div>
+        <div class="card-title">Accounting Process 會計資訊處理</div>
+        <div class="step-item"><div class="step-num">1</div><div><div><span class="step-zh">辨認</span><span class="step-en">Identification</span></div><div class="step-desc">找出哪些事件是「需要記帳的經濟活動」</div></div></div>
+        <div class="step-item"><div class="step-num">2</div><div><div><span class="step-zh">衡量</span><span class="step-en">Measurement</span></div><div class="step-desc">用金額來表達這個事件的大小</div></div></div>
+        <div class="step-item"><div class="step-num">3</div><div><div><span class="step-zh">記錄</span><span class="step-en">Recording</span></div><div class="step-desc">把金額寫進帳本（日記帳）</div></div></div>
+        <div class="step-item"><div class="step-num">4</div><div><div><span class="step-zh">分類</span><span class="step-en">Classification</span></div><div class="step-desc">把類似的交易歸在同一類（分類帳）</div></div></div>
+        <div class="step-item"><div class="step-num">5</div><div><div><span class="step-zh">彙總</span><span class="step-en">Summarization</span></div><div class="step-desc">把所有資料加總，整理出期末數字</div></div></div>
+        <div class="step-item"><div class="step-num">6</div><div><div><span class="step-zh">分析</span><span class="step-en">Analysis</span></div><div class="step-desc">解讀數字背後的意義，得出結論</div></div></div>
+        <div class="tip" style="margin-top:10px">⭐ 六步驟的<strong>順序</strong>是第一章最常考的內容，務必按順序背熟！</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">必背英文句型 · Key Sentences</div>
+        <div class="sentence-card"><div class="sentence-en">Accounting is an information system.</div><div class="sentence-zh">會計是一種資訊系統。</div></div>
+        <div class="sentence-card"><div class="sentence-en">Financial statements provide useful information for decision making.</div><div class="sentence-zh">財務報表提供決策有用的資訊。</div></div>
+        <div class="sentence-card"><div class="sentence-en">Managers use accounting information to make business decisions.</div><div class="sentence-zh">管理者利用會計資訊進行商業決策。</div></div>
+        <div class="sentence-card"><div class="sentence-en">Investors use financial statements to evaluate a company.</div><div class="sentence-zh">投資人利用財務報表評估企業。</div></div>
+      </div>
+
+    </div><!-- /lesson -->
+
+    <!-- GLOSSARY -->
+    <div class="section" id="section-glossary">
+      <div class="gloss-wrap">
+        <div class="gloss-header">
+          <span>中文</span><span>English</span><span class="col-desc">說明</span>
+        </div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">會計</div><div class="gloss-en">Accounting</div></div><div class="gloss-desc">記錄、分析財務活動的學問</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">資訊系統</div><div class="gloss-en">Information System</div></div><div class="gloss-desc">收集、處理、傳遞資訊的機制</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">財務報表</div><div class="gloss-en">Financial Statements</div></div><div class="gloss-desc">呈現公司財務狀況的正式文件</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">決策</div><div class="gloss-en">Decision Making</div></div><div class="gloss-desc">從多個選項中選最佳方案</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">管理階層</div><div class="gloss-en">Management</div></div><div class="gloss-desc">公司內部負責營運的主管群</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">投資者</div><div class="gloss-en">Investor</div></div><div class="gloss-desc">出錢購買股份的外部人士</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">員工</div><div class="gloss-en">Employee</div></div><div class="gloss-desc">公司內部雇用的人員</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">債權人</div><div class="gloss-en">Creditor</div></div><div class="gloss-desc">借錢給公司的銀行或廠商</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">政府機關</div><div class="gloss-en">Government Agency</div></div><div class="gloss-desc">監管企業的公部門（如國稅局）</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">辨認</div><div class="gloss-en">Identification</div></div><div class="gloss-desc">找出需要記錄的經濟事件</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">衡量</div><div class="gloss-en">Measurement</div></div><div class="gloss-desc">以金額量化經濟事件</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">記錄</div><div class="gloss-en">Recording</div></div><div class="gloss-desc">把交易寫入帳本</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">分類</div><div class="gloss-en">Classification</div></div><div class="gloss-desc">將交易按性質歸類</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">彙總</div><div class="gloss-en">Summarization</div></div><div class="gloss-desc">加總所有數字整理成報表</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">分析</div><div class="gloss-en">Analysis</div></div><div class="gloss-desc">解讀報表數字的含義</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">資訊</div><div class="gloss-en">Information</div></div><div class="gloss-desc">可用於做決定的有用資料</div></div>
+      </div>
+    </div><!-- /glossary -->
+
+    <!-- FLOW -->
+    <div class="section" id="section-flow">
+      <div class="card">
+        <div class="card-label">會計循環圖 · Accounting Process Flow</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px">從商業事件到最終決策的完整路徑</div>
+        <div class="flow-wrap">
+          <div class="flow-node start"><div class="fz">經濟活動發生</div><div class="fe">Business Transaction</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">① 辨認</div><div class="fe">Identification</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">② 衡量</div><div class="fe">Measurement</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">③ 記錄</div><div class="fe">Recording</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">④ 分類</div><div class="fe">Classification</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">⑤ 彙總</div><div class="fe">Summarization</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">⑥ 分析</div><div class="fe">Analysis</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node result"><div class="fz">財務報表</div><div class="fe">Financial Statements</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node end"><div class="fz">使用者決策</div><div class="fe">Decision Making</div></div>
+        </div>
+        <div class="tip" style="margin-top:14px">⭐ <strong>考試重點：</strong>六步驟順序（① 辨認 → ⑥ 分析）幾乎必考，要能默寫出來。</div>
+      </div>
+    </div><!-- /flow -->
+
+    <!-- QUIZ -->
+    <div class="section" id="section-quiz">
+      <div class="score-banner">
+        <div class="score-label">本節得分 Score</div>
+        <div class="score-val" id="score-display">0 / 5</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q1 of 5</div>
+        <div class="q-text">會計被稱為「資訊系統」，主要是因為它能夠：</div>
+        <div class="q-sub">Accounting is called an "information system" mainly because it:</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q1',false)">A. 自動記帳，不需要人工處理<small>Records transactions automatically without human effort</small></button>
+          <button class="opt" onclick="answer(this,'q1',true)">B. 提供財務資訊幫助使用者做決策<small>Provides financial information to help users make decisions</small></button>
+          <button class="opt" onclick="answer(this,'q1',false)">C. 只服務政府機關查稅用<small>Serves only government agencies for tax auditing</small></button>
+          <button class="opt" onclick="answer(this,'q1',false)">D. 取代人力資源管理系統<small>Replaces human resource management systems</small></button>
+        </div>
+        <div class="explain" id="exp-q1">✅ <strong>正確答案 B。</strong>會計的核心定義是「資訊系統」，目的是提供財務資訊給各類使用者做決策。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q2 of 5</div>
+        <div class="q-text">下列何者不屬於會計資訊的使用者？</div>
+        <div class="q-sub">Which of the following is NOT a user of accounting information?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q2',false)">A. 債權人 Creditors</button>
+          <button class="opt" onclick="answer(this,'q2',false)">B. 政府機關 Government Agencies</button>
+          <button class="opt" onclick="answer(this,'q2',true)">C. 氣象局 Meteorological Bureau</button>
+          <button class="opt" onclick="answer(this,'q2',false)">D. 外部投資者 External Investors</button>
+        </div>
+        <div class="explain" id="exp-q2">✅ <strong>正確答案 C。</strong>氣象局與財務資訊無關。使用者共五類：管理階層、投資者、員工、債權人、政府機關。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q3 of 5</div>
+        <div class="q-text">會計資訊處理程序的第一個步驟是什麼？</div>
+        <div class="q-sub">What is the FIRST step in the accounting process?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q3',false)">A. 記錄 Recording</button>
+          <button class="opt" onclick="answer(this,'q3',true)">B. 辨認 Identification</button>
+          <button class="opt" onclick="answer(this,'q3',false)">C. 分析 Analysis</button>
+          <button class="opt" onclick="answer(this,'q3',false)">D. 彙總 Summarization</button>
+        </div>
+        <div class="explain" id="exp-q3">✅ <strong>正確答案 B。</strong>順序：辨認 → 衡量 → 記錄 → 分類 → 彙總 → 分析。第一步是「辨認」。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q4 of 5</div>
+        <div class="q-text">「決策」在會計學中的正確定義是？</div>
+        <div class="q-sub">How is "decision making" defined in accounting?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q4',false)">A. 盡量不做選擇，讓市場決定<small>Avoiding choices and letting the market decide</small></button>
+          <button class="opt" onclick="answer(this,'q4',false)">B. 永遠選擇最便宜的方案<small>Always choosing the cheapest option</small></button>
+          <button class="opt" onclick="answer(this,'q4',true)">C. 在多個可行方案中選出最適合的一個<small>Selecting the best alternative from several possible options</small></button>
+          <button class="opt" onclick="answer(this,'q4',false)">D. 由政府幫企業做決定<small>Having the government make decisions for businesses</small></button>
+        </div>
+        <div class="explain" id="exp-q4">✅ <strong>正確答案 C。</strong>決策：在諸多可行方案中，選出最適合的方案去執行。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q5 of 5</div>
+        <div class="q-text">將帳目中類似的交易歸在同一類，稱為？</div>
+        <div class="q-sub">Grouping similar transactions together in accounting is called?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q5',false)">A. 衡量 Measurement</button>
+          <button class="opt" onclick="answer(this,'q5',false)">B. 記錄 Recording</button>
+          <button class="opt" onclick="answer(this,'q5',true)">C. 分類 Classification</button>
+          <button class="opt" onclick="answer(this,'q5',false)">D. 辨認 Identification</button>
+        </div>
+        <div class="explain" id="exp-q5">✅ <strong>正確答案 C。</strong>分類（Classification）把同性質交易歸在一起，放入分類帳（Ledger）。</div>
+      </div>
+
+      <button class="reset-btn" onclick="resetQuiz()">🔄 重新作答 · Reset Quiz</button>
+      <div class="footer">V1.5 · Go Freight Accounting Onboarding</div>
+    </div><!-- /quiz -->
+
+  </div><!-- /unit-1-1 -->
+
+</div><!-- /main-content -->
+
+<script>
+/* ══════════════════════════════════════════════════════
+   課程目錄
+   新增單元：在 UNITS 加一筆，ready:true，
+   並在 HTML 加 <div id="unit-X-X"> 區塊
+   ══════════════════════════════════════════════════════ */
+var UNITS = [
+  { id:'0-1', zh:'GoFreight 前置知識',      en:'GoFreight Pre-Knowledge',           chapter:'第零章 · GoFreight 前置知識',   ready:true  },
+  { id:'1-1', zh:'會計的意義及目的',      en:'Meaning & Purpose of Accounting',   chapter:'第一章 · 會計基本概念',         ready:true  },
+  { id:'1-2', zh:'會計基本假設',           en:'Basic Accounting Assumptions',       chapter:'第一章 · 會計基本概念',         ready:false },
+  { id:'1-3', zh:'會計品質特性',           en:'Qualitative Characteristics',        chapter:'第一章 · 會計基本概念',         ready:false },
+  { id:'1-4', zh:'財務報表的種類',         en:'Types of Financial Statements',      chapter:'第一章 · 會計基本概念',         ready:false },
+  { id:'2-1', zh:'會計方程式',             en:'The Accounting Equation',            chapter:'第二章 · 交易與會計方程式',     ready:false },
+  { id:'2-2', zh:'交易對會計方程式的影響', en:'Effects of Transactions',            chapter:'第二章 · 交易與會計方程式',     ready:false },
+  { id:'2-3', zh:'財務報表的編製',         en:'Preparing Financial Statements',     chapter:'第二章 · 交易與會計方程式',     ready:false },
+  { id:'3-1', zh:'借貸法則',               en:'Debit & Credit Rules',               chapter:'第三章 · 借貸記帳',             ready:false },
+  { id:'3-2', zh:'日記帳與分類帳',         en:'Journal & Ledger',                   chapter:'第三章 · 借貸記帳',             ready:false },
+  { id:'3-3', zh:'試算表',                 en:'Trial Balance',                      chapter:'第三章 · 借貸記帳',             ready:false }
+];
+
+var currentUnit = '1-1';
+var scores = {};
+
+/* ─── Measure header so tab-bar sticks correctly ─── */
+function syncHeaderHeight() {
+  var h = document.getElementById('app-header').getBoundingClientRect().height;
+  document.documentElement.style.setProperty('--header-h', h + 'px');
+}
+
+/* ─── Build drawer ─── */
+function buildDrawer() {
+  var body = document.getElementById('drawer-body');
+  var html = '', lastChapter = '';
+  UNITS.forEach(function(u) {
+    if (u.chapter !== lastChapter) {
+      html += '<div class="chapter-label">' + u.chapter + '</div>';
+      lastChapter = u.chapter;
+    }
+    var cls = 'unit-btn' + (u.id === currentUnit ? ' active' : '') + (!u.ready ? ' coming' : '');
+    var handler = u.ready ? ' onclick="loadUnit(\'' + u.id + '\')"' : '';
+    html += '<button class="' + cls + '"' + handler + ' aria-label="' + u.id + ' ' + u.zh + '">';
+    html += '<div class="unit-num">' + u.id + '</div>';
+    html += '<div class="unit-info"><div class="unit-name-zh">' + u.zh + '</div><div class="unit-name-en">' + u.en + '</div></div>';
+    if (!u.ready) html += '<span class="coming-pill" aria-label="即將推出">即將推出</span>';
+    html += '</button>';
+  });
+  body.innerHTML = html;
+}
+
+/* ─── Load unit ─── */
+function loadUnit(id) {
+  currentUnit = id;
+  var unit = UNITS.find(function(u){ return u.id === id; });
+
+  /* header text */
+  document.getElementById('header-unit').textContent = id + ' ' + unit.zh;
+  document.getElementById('header-sub').textContent  = unit.en;
+
+  /* header colour: purple for ch0, blue for rest */
+  var hdr = document.getElementById('app-header');
+  if (id.charAt(0) === '0') {
+    hdr.classList.add('ch0');
+    document.getElementById('header-badge').textContent = '第零章 · GoFreight 前置知識';
+  } else {
+    hdr.classList.remove('ch0');
+    document.getElementById('header-badge').textContent = '第' + id.charAt(0) + '章 · Chapter ' + id.charAt(0);
+  }
+
+  var content   = document.getElementById('main-content');
+  var tabBar    = document.getElementById('tab-bar');
+
+  fetch('units/' + id + '.html')
+    .then(function(r) {
+      if (!r.ok) throw new Error('not found');
+      return r.text();
+    })
+    .then(function(html) {
+      content.innerHTML = html;
+      scores = {};
+      if (id.charAt(0) === '0') {
+        tabBar.style.display = 'none';
+        var firstSec = content.querySelector('.section');
+        if (firstSec) firstSec.classList.add('active');
+        if (id === '0-3' && typeof renderTerms === 'function') renderTerms();
+      } else {
+        switchTabDirect('lesson');
+        tabBar.style.display = '';
+      }
+      buildDrawer();
+      closeDrawer();
+      window.scrollTo(0, 0);
+      syncHeaderHeight();
+    })
+    .catch(function() {
+      content.innerHTML =
+        '<div class="coming-screen">' +
+        '<div class="coming-icon">📚</div>' +
+        '<div class="coming-title">' + id + ' ' + unit.zh + '</div>' +
+        '<div class="coming-desc">這個單元的內容即將推出。<br>請繼續提供講義，我們一起完成它！<br><br>' +
+        '<em>' + unit.en + '</em><br><em>Content coming soon.</em></div>' +
+        '</div>';
+      tabBar.style.display = 'none';
+      buildDrawer();
+      closeDrawer();
+      window.scrollTo(0, 0);
+      syncHeaderHeight();
+    });
+}
+
+/* ─── Tab switch ─── */
+function switchTab(tab, btn) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var sec = document.getElementById('section-' + tab);
+  if (sec) sec.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+function switchTabDirect(tab) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var sec = document.getElementById('section-' + tab);
+  if (sec) sec.classList.add('active');
+  var tabs = document.querySelectorAll('.tab-btn');
+  if (tabs[0]) tabs[0].classList.add('active');
+}
+
+/* ─── Drawer ─── */
+function openDrawer() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ─── Quiz ─── */
+function answer(btn, qid, correct) {
+  if (scores[qid] !== undefined) return;
+  var opts = btn.closest('.opts').querySelectorAll('.opt');
+  opts.forEach(function(o){ o.classList.add('disabled'); });
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if (!correct) {
+    opts.forEach(function(o){
+      if ((o.getAttribute('onclick') || '').indexOf('true') !== -1)
+        o.classList.add('correct');
+    });
+  }
+  var exp = document.getElementById('exp-' + qid);
+  if (exp) exp.classList.add('show');
+  scores[qid] = correct ? 1 : 0;
+  var total = Object.values(scores).reduce(function(a,b){ return a+b; }, 0);
+  var disp = document.getElementById('score-display');
+  if (disp) disp.textContent = total + ' / 5';
+}
+function resetQuiz() {
+  scores = {};
+  var disp = document.getElementById('score-display');
+  if (disp) disp.textContent = '0 / 5';
+  document.querySelectorAll('.opt').forEach(function(o){
+    o.classList.remove('correct','wrong','disabled');
+  });
+  document.querySelectorAll('.explain').forEach(function(e){
+    e.classList.remove('show');
+  });
+}
+
+/* ─── Init ─── */
+buildDrawer();
+syncHeaderHeight();
+window.addEventListener('resize', syncHeaderHeight);
+
+/* ══════════════════════════════════════════════════════
+   CH0 GLOSSARY (Unit 0-3)
+   ══════════════════════════════════════════════════════ */
+var GLOSSARY = [
+  { en:"Accounts Payable (AP)", zh:"應付帳款", cat:"ap", freq:"high",
+    defZh:"你欠供應商的錢。貨代場景中，欠船公司、卡車公司、報關行的費用都算應付帳款。",
+    defEn:"Money you owe to vendors. In freight, this includes amounts owed to carriers, truckers, and customs brokers.",
+    useZh:"馬士基帳單過帳後，A/P 增加 USD 2,150。付款完成後 A/P 歸零。" },
+  { en:"AP Accrual", zh:"AP 預提 / 應付帳款預提", cat:"accrual", freq:"high",
+    defZh:"在尚未收到供應商發票的情況下，根據預估金額提前將費用認列進 P&L 的會計行為。",
+    defEn:"Recording an estimated expense in P&L before the vendor invoice arrives, so costs reflect the correct period.",
+    useZh:"Customer A 每月底手動做 AP Accrual 處理 200+ 票缺發票貨件。這個 Case 就是要把這個流程產品化。" },
+  { en:"Accrual Basis Accounting", zh:"應計制會計", cat:"accrual", freq:"high",
+    defZh:"費用和收入在「發生時」認列，而非在實際付款或收款時認列。GAAP 要求大多數企業採用此方法。",
+    defEn:"Revenues and expenses are recorded when they occur, not when cash changes hands. Required by GAAP.",
+    useZh:"Customer B 的審計師要求遵循 GAAP——貨件完成就要認列成本，不能等發票到。" },
+  { en:"Accrual Reversal", zh:"預提反轉 / 沖回", cat:"accrual", freq:"high",
+    defZh:"在下個會計期間（通常是月初）自動反轉上期的預提分錄，避免費用被重複計算。",
+    defEn:"An automatic JE that reverses the prior period's accrual, preventing double-counting when the actual invoice posts.",
+    useZh:"1 月底做 Accrual → 2 月 1 日系統自動反轉 → 2 月中發票到 → 正式過帳。費用只計算一次。" },
+  { en:"General Ledger (GL)", zh:"總帳", cat:"report", freq:"high",
+    defZh:"公司所有財務交易的主記錄。P&L 和 Balance Sheet 都從 GL 自動彙總產生。只有過帳的分錄才會進入 GL。",
+    defEn:"The master record of all financial transactions. P&L and Balance Sheet are both generated from the GL.",
+    useZh:"Draft AP 不過帳到 GL，所以 P&L 看不到。按下 Post 之後，費用才進入 GL，報表才會反映。" },
+  { en:"P&L (Profit & Loss)", zh:"損益表", cat:"report", freq:"high",
+    defZh:"從 GL 彙總收入和費用，顯示某段時間（通常一個月）公司賺了還是虧了的報表。",
+    defEn:"Summary report from GL totaling all revenue and expenses to show whether the company made or lost money.",
+    useZh:"老闆看 5 月 P&L：收入 USD 3,500，費用 USD 2,600，毛利 USD 900。" },
+  { en:"Balance Sheet", zh:"資產負債表", cat:"report", freq:"mid",
+    defZh:"從 GL 彙總顯示公司在某時間點的資產、負債和權益。預提過帳後負債端會出現 Accrued Liability。",
+    defEn:"Summary report from GL showing assets, liabilities, and equity at a point in time.",
+    useZh:"Customer B 要求貨件完成時 Balance Sheet 負債端要出現 Accrued Liability，供審計師核對。" },
+  { en:"Trial Balance", zh:"試算表", cat:"report", freq:"low",
+    defZh:"列出所有 GL 科目餘額以驗證借貸平衡。月結前的核對工具，確認帳目無誤後才輸出財報。",
+    defEn:"Report listing all GL account balances to verify total debits equal total credits. Final verification before reports.",
+    useZh:"如果 Accrual 借貸不平衡，Trial Balance 會顯示錯誤，月結無法完成，財報要重做。" },
+  { en:"Accrued Liability", zh:"應計負債", cat:"accrual", freq:"mid",
+    defZh:"預提過帳時在 Balance Sheet 負債端新增的科目。代表「已認列費用但尚未支付的義務」。發票到了後被正式 A/P 取代。",
+    defEn:"Liability on Balance Sheet when accrual posts. Represents obligation for costs recognized but not yet invoiced.",
+    useZh:"Accrual 過帳：借記費用（P&L）+ 貸記 Accrued Liability（Balance Sheet）。發票到了：Accrued Liability 歸零，換成正式 A/P。" },
+  { en:"Journal Entry (JE)", zh:"日記帳分錄", cat:"process", freq:"mid",
+    defZh:"記錄財務交易的基本單位。每筆分錄有借（Debit）和貸（Credit），兩者必須平衡。Accrual 和 Reversal 都是透過 JE 實現。",
+    defEn:"The basic unit of recording a financial transaction. Every JE has Debit and Credit that must balance.",
+    useZh:"Customer A 月底手動建 JE 做預提，月初再手動反轉。200+ 票全靠人工，非常容易出錯。" },
+  { en:"Draft AP", zh:"草稿應付帳款", cat:"ap", freq:"high",
+    defZh:"GoFreight 現行系統中，訂艙後建立的預估費用記錄。草稿狀態，不影響任何財務報表，不過帳到 GL。",
+    defEn:"In GoFreight, an estimated cost record created after booking. Draft status — does not post to GL.",
+    useZh:"建立 Draft AP：海運費預估 USD 2,000。財務報表完全看不到，要等發票來了過帳才看得到。" },
+  { en:"Post / Posting", zh:"過帳", cat:"process", freq:"high",
+    defZh:"將交易從草稿狀態正式確認並記入 GL 的動作。過帳後才影響 P&L 和 Balance Sheet，且通常不可逆。",
+    defEn:"The act of confirming a transaction and recording it in the GL. Affects financial statements once posted.",
+    useZh:"收到馬士基發票 → 核對金額 → 按 Post → USD 2,150 正式進入 GL，出現在 P&L 費用欄。" },
+  { en:"GAAP", zh:"美國通用會計準則", cat:"accrual", freq:"mid",
+    defZh:"Generally Accepted Accounting Principles。美國企業財務報告的標準規範，包含應計制會計的要求。",
+    defEn:"Generally Accepted Accounting Principles — US standard for financial reporting. Requires accrual basis.",
+    useZh:"Customer B 明確說「我們的審計師要求遵循 GAAP」。解決方案必須產生合規的會計分錄。" },
+  { en:"Audit Trail", zh:"稽核軌跡", cat:"process", freq:"mid",
+    defZh:"記錄每筆財務交易的完整歷史：誰在何時做了什麼、金額如何從預估變實際。Customer B 明確要求這個功能。",
+    defEn:"Complete history of every transaction — who did what, when, how amounts changed from estimate to actual.",
+    useZh:"每一步狀態變化（Draft → Accrued → Reversed → Posted）都要有時間戳和操作人記錄，供審計師追蹤。" },
+  { en:"Estimated vs. Actual Cost", zh:"預估 vs. 實際費用", cat:"accrual", freq:"high",
+    defZh:"訂艙時的預估金額和收到發票的實際金額之間的差異。差異管理是 AP Accrual 功能的核心挑戰。",
+    defEn:"Difference between cost estimated at booking and actual amount on vendor invoice. Core design challenge.",
+    useZh:"預估 USD 2,000，實際 USD 2,150，差額 USD 150。系統要顯示差異，讓財務決定處理方式。" },
+  { en:"Vendor Bill", zh:"供應商帳單", cat:"ap", freq:"high",
+    defZh:"供應商寄來要求付款的文件。船公司、卡車公司、倉庫都是供應商。注意：是供應商開給你的，不是你開給客戶的。",
+    defEn:"Document vendors send requesting payment. Carriers, truckers, warehouses all send Vendor Bills.",
+    useZh:"馬士基寄來海運費帳單 USD 2,150。財務核對後確認金額，才能過帳入 A/P。" },
+  { en:"Accounts Receivable (AR)", zh:"應收帳款", cat:"ap", freq:"high",
+    defZh:"別人欠你的錢。貨代開立發票給出口商後，出口商尚未付款的金額就是 A/R。",
+    defEn:"Money owed TO you. After issuing an invoice, the unpaid amount becomes A/R.",
+    useZh:"開發票 USD 3,500 → A/R 增加 USD 3,500 → 出口商付款後 → A/R 歸零，現金入帳。" },
+  { en:"Period Close", zh:"月結 / 期末結帳", cat:"process", freq:"mid",
+    defZh:"每月底鎖定 GL、產出當月財報的流程。預提是月結最關鍵的步驟之一。",
+    defEn:"The month-end process of locking the GL and generating monthly financial reports. Accrual is a critical step.",
+    useZh:"月結前財務要做完所有 Accrual，確認 Trial Balance 平衡後，才能正式輸出財報。" }
+];
+
+var CAT_LABEL = { ap:"AP 應付", accrual:"Accrual 預提", report:"財務報表", process:"流程" };
+var FREQ_LABEL = { high:"高頻", mid:"中頻", low:"低頻" };
+var currentCat = 'all';
+var currentSearch = '';
+
+function renderTerms() {
+  var list = document.getElementById('terms-list');
+  if (!list) return;
+  var q = currentSearch.toLowerCase().trim();
+  var filtered = GLOSSARY.filter(function(t) {
+    var catOk = (currentCat === 'all' || t.cat === currentCat);
+    var searchOk = !q ||
+      t.en.toLowerCase().indexOf(q) !== -1 ||
+      t.zh.indexOf(q) !== -1 ||
+      t.defZh.indexOf(q) !== -1;
+    return catOk && searchOk;
+  });
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="no-results">沒有符合的術語<br>No matching terms</div>';
+    return;
+  }
+  var html = '';
+  filtered.forEach(function(t, i) {
+    html += '<div class="term-card" onclick="this.classList.toggle(\'open\')">';
+    html +=   '<div class="term-row">';
+    html +=     '<div class="term-titles">';
+    html +=       '<div class="term-en">' + t.en + '</div>';
+    html +=       '<div class="term-zh">' + t.zh + '</div>';
+    html +=     '</div>';
+    html +=     '<div class="term-badges">';
+    html +=       '<span class="t-badge ' + t.freq + '">' + FREQ_LABEL[t.freq] + '</span>';
+    html +=       '<span class="t-cat ' + t.cat + '">' + CAT_LABEL[t.cat] + '</span>';
+    html +=     '</div>';
+    html +=     '<span class="term-chevron">▼</span>';
+    html +=   '</div>';
+    html +=   '<div class="term-body">';
+    html +=     '<div class="term-def">' + t.defZh + '</div>';
+    html +=     '<div class="term-def en">' + t.defEn + '</div>';
+    html +=     '<div class="term-usage"><strong>情境：</strong>' + t.useZh + '</div>';
+    html +=   '</div>';
+    html += '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function setCat(cat, btn) {
+  currentCat = cat;
+  var btns = document.querySelectorAll('.cat-btn');
+  btns.forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderTerms();
+}
+
+function filterTerms() {
+  var s = document.getElementById('gloss-search');
+  if (s) {
+    currentSearch = s.value;
+    renderTerms();
+  }
+}
+
+/* hook glossary render into loadUnit */
+var _origLoadUnit = loadUnit;
+loadUnit = function(id) {
+  _origLoadUnit(id);
+  if (id === '0-3') {
+    currentCat = 'all';
+    currentSearch = '';
+    setTimeout(renderTerms, 50);
+  }
+};
+</script>
+</body>
+</html>

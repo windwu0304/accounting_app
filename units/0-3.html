@@ -1,0 +1,30 @@
+﻿    <div class="section active">
+
+      <div class="card">
+        <div class="card-label">第零章 · 術語表</div>
+        <div class="card-title">GoFreight Glossary · 18 個核心術語</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>本單元收錄 GoFreight AP Accrual 功能涉及的 18 個關鍵會計與業務術語。<strong>點擊卡片展開詳細定義和情境</strong>。</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>18 essential accounting and operational terms involved in GoFreight's AP Accrual feature. Tap a card to expand definition and context.</p>
+          </div>
+        </div>
+      </div>
+
+      <input type="text" class="gloss-search" id="gloss-search" placeholder="🔍 搜尋術語（中文 / 英文）Search terms..." oninput="filterTerms()">
+
+      <div class="cat-filter">
+        <button class="cat-btn active" data-cat="all" onclick="setCat('all',this)">全部</button>
+        <button class="cat-btn" data-cat="ap" onclick="setCat('ap',this)">AP 應付</button>
+        <button class="cat-btn" data-cat="accrual" onclick="setCat('accrual',this)">Accrual 預提</button>
+        <button class="cat-btn" data-cat="report" onclick="setCat('report',this)">財務報表</button>
+        <button class="cat-btn" data-cat="process" onclick="setCat('process',this)">流程</button>
+      </div>
+
+      <div id="terms-list"></div>
+
+    </div>
