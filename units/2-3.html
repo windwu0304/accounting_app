@@ -1,0 +1,211 @@
+
+    <!-- LESSON -->
+    <div class="section active" id="section-lesson">
+
+      <div class="card">
+        <div class="card-label">Part 1 · 什麼是T字帳</div>
+        <div class="card-title">T字帳 · T Account</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>T字帳（T Account）是分類帳中每個科目的視覺呈現，外形像字母「T」。左側記<strong>借方（Debit）</strong>，右側記<strong>貸方（Credit）</strong>。每個科目都有一個專屬T字帳。</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>A T Account is the visual representation of each account in the General Ledger, shaped like the letter "T". The <strong>left side = Debit (Dr.)</strong>; the <strong>right side = Credit (Cr.)</strong>. Each account has its own T Account.</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0">
+          <div style="padding:8px 12px;text-align:center;font-weight:700;border-bottom:2px solid var(--border);font-size:13px">帳戶名稱 Account Name</div>
+          <div style="display:flex">
+            <div style="flex:1;padding:10px 12px;border-right:2px solid var(--border)">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;font-weight:600">借方 Debit (Dr.)</div>
+              <div style="font-size:12px;color:var(--text-muted)">（增加金額寫這邊）</div>
+            </div>
+            <div style="flex:1;padding:10px 12px">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;font-weight:600">貸方 Credit (Cr.)</div>
+              <div style="font-size:12px;color:var(--text-muted)">（增加金額寫這邊）</div>
+            </div>
+          </div>
+        </div>
+        <div class="tip">💡 T字帳讓你一眼看出每個科目的所有借貸記錄，並快速計算餘額。</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Part 2 · 正常餘額方向</div>
+        <div class="card-title">正常餘額 · Normal Balance</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>每類科目有一個「正常餘額（Normal Balance）」方向，就是該科目餘額通常落在哪一側。正常餘額也是「增加」的那一側。</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>Each element has a "Normal Balance" — the side where its balance naturally falls. The normal balance side is also the side that increases the account.</p>
+          </div>
+        </div>
+        <div class="step-item"><div class="step-num">A</div><div><div><span class="step-zh">資產 Assets</span><span class="step-en">→ 借方餘額（Debit Balance）</span></div><div class="step-desc">借方增加 / 貸方減少。例：Cash 收到錢 → 記借方</div></div></div>
+        <div class="step-item"><div class="step-num">X</div><div><div><span class="step-zh">費用 Expense</span><span class="step-en">→ 借方餘額（Debit Balance）</span></div><div class="step-desc">借方增加 / 貸方減少。例：薪資費用增加 → 記借方</div></div></div>
+        <div class="step-item"><div class="step-num">L</div><div><div><span class="step-zh">負債 Liabilities</span><span class="step-en">→ 貸方餘額（Credit Balance）</span></div><div class="step-desc">貸方增加 / 借方減少。例：銀行借款增加 → 記貸方</div></div></div>
+        <div class="step-item"><div class="step-num">E</div><div><div><span class="step-zh">權益 Equity</span><span class="step-en">→ 貸方餘額（Credit Balance）</span></div><div class="step-desc">貸方增加 / 借方減少。例：股本增加 → 記貸方</div></div></div>
+        <div class="step-item"><div class="step-num">R</div><div><div><span class="step-zh">收入 Revenue</span><span class="step-en">→ 貸方餘額（Credit Balance）</span></div><div class="step-desc">貸方增加 / 借方減少。例：銷貨收入增加 → 記貸方</div></div></div>
+        <div class="tip">⭐ 口訣：<strong>借增資費 / 貸增負權收</strong>。資產和費用借方增加；負債、權益、收入貸方增加。</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Part 3 · T字帳範例</div>
+        <div class="card-title">Cash（現金）T字帳範例 · T Account Example</div>
+        <div class="bilingual">
+          <div class="lang-block zh">
+            <div class="lang-tag">中文</div>
+            <p>將五筆交易的現金影響，過入 Cash T字帳：</p>
+          </div>
+          <div class="lang-block en">
+            <div class="lang-tag">English</div>
+            <p>Posting the cash effects of 5 transactions into the Cash T Account:</p>
+          </div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:10px 0">
+          <div style="padding:8px 12px;text-align:center;font-weight:700;border-bottom:2px solid var(--border);font-size:14px">Cash（現金）</div>
+          <div style="display:flex">
+            <div style="flex:1;padding:10px 14px;border-right:2px solid var(--border)">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:600">借方 Dr. ＋</div>
+              <div style="font-size:13px;line-height:2">T1: 200,000<br>T2: 300,000</div>
+              <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:6px;font-size:13px;font-weight:600">合計: 500,000</div>
+            </div>
+            <div style="flex:1;padding:10px 14px">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;font-weight:600">貸方 Cr. －</div>
+              <div style="font-size:13px;line-height:2">T3: 100,000<br>T5: &nbsp;&nbsp;50,000</div>
+              <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:6px;font-size:13px;font-weight:600">合計: 150,000</div>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--border);padding:8px 14px;font-size:13px">
+            借方餘額（Debit Balance）= 500,000 − 150,000 = <strong>350,000</strong>
+          </div>
+        </div>
+        <div class="tip">💡 現金是資產，正常餘額在借方。借方合計 &gt; 貸方合計，餘額在借方。</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">必背英文句型 · Key Sentences</div>
+        <div class="sentence-card"><div class="sentence-en">The left side of a T account is the debit side; the right side is the credit side.</div><div class="sentence-zh">T字帳左側是借方，右側是貸方。</div></div>
+        <div class="sentence-card"><div class="sentence-en">Assets and expenses have normal debit balances.</div><div class="sentence-zh">資產和費用的正常餘額在借方。</div></div>
+        <div class="sentence-card"><div class="sentence-en">Liabilities, equity, and revenues have normal credit balances.</div><div class="sentence-zh">負債、權益和收入的正常餘額在貸方。</div></div>
+      </div>
+
+    </div><!-- /lesson -->
+
+    <!-- GLOSSARY -->
+    <div class="section" id="section-glossary">
+      <div class="gloss-wrap">
+        <div class="gloss-header">
+          <span>中文</span><span>English</span><span class="col-desc">說明</span>
+        </div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">T字帳</div><div class="gloss-en">T Account</div></div><div class="gloss-desc">分類帳中每個科目的T形視覺表示</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">借方</div><div class="gloss-en">Debit (Dr.)</div></div><div class="gloss-desc">T字帳左側；資產和費用增加記此側</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">貸方</div><div class="gloss-en">Credit (Cr.)</div></div><div class="gloss-desc">T字帳右側；負債、權益、收入增加記此側</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">正常餘額</div><div class="gloss-en">Normal Balance</div></div><div class="gloss-desc">科目餘額通常所在的一側（也是增加的那側）</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">借方餘額</div><div class="gloss-en">Debit Balance</div></div><div class="gloss-desc">借方合計大於貸方合計時的餘額</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">貸方餘額</div><div class="gloss-en">Credit Balance</div></div><div class="gloss-desc">貸方合計大於借方合計時的餘額</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">分類帳</div><div class="gloss-en">General Ledger</div></div><div class="gloss-desc">所有科目T字帳的集合</div></div>
+        <div class="gloss-row"><div class="gloss-top"><div class="gloss-zh">帳戶餘額</div><div class="gloss-en">Account Balance</div></div><div class="gloss-desc">借方合計與貸方合計的差額</div></div>
+      </div>
+    </div><!-- /glossary -->
+
+    <!-- FLOW -->
+    <div class="section" id="section-flow">
+      <div class="card">
+        <div class="card-label">T字帳使用流程 · How to Use T Accounts</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px">從分錄到計算科目餘額</div>
+        <div class="flow-wrap">
+          <div class="flow-node start"><div class="fz">日記帳分錄</div><div class="fe">Journal Entry (Dr. / Cr.)</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">① 找到對應科目的T字帳</div><div class="fe">Locate the Account's T Account</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">② 借方記左側 / 貸方記右側</div><div class="fe">Post Dr. to Left / Cr. to Right</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="fz">③ 加總兩側金額</div><div class="fe">Total Each Side</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node result"><div class="fz">④ 計算餘額（大減小）</div><div class="fe">Balance = Larger Side − Smaller Side</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node end"><div class="fz">⑤ 確認正常餘額方向</div><div class="fe">Verify Normal Balance Direction</div></div>
+        </div>
+        <div class="tip" style="margin-top:14px">⭐ 所有科目T字帳的借方餘額合計應等於貸方餘額合計——這就是試算表的核心概念。</div>
+      </div>
+    </div><!-- /flow -->
+
+    <!-- QUIZ -->
+    <div class="section" id="section-quiz">
+      <div class="score-banner">
+        <div class="score-label">本節得分 Score</div>
+        <div class="score-val" id="score-display">0 / 5</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q1 of 5</div>
+        <div class="q-text">T字帳的左側是什麼？</div>
+        <div class="q-sub">The left side of a T Account is called:</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q1',false)">A. 貸方 Credit</button>
+          <button class="opt" onclick="answer(this,'q1',true)">B. 借方 Debit</button>
+          <button class="opt" onclick="answer(this,'q1',false)">C. 餘額 Balance</button>
+          <button class="opt" onclick="answer(this,'q1',false)">D. 正常餘額 Normal Balance</button>
+        </div>
+        <div class="explain" id="exp-q1">✅ <strong>正確答案 B。</strong>T字帳左側 = 借方（Debit / Dr.）；右側 = 貸方（Credit / Cr.）。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q2 of 5</div>
+        <div class="q-text">下列哪個科目的正常餘額在「借方」？</div>
+        <div class="q-sub">Which account has a normal DEBIT balance?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q2',false)">A. 銀行借款 Bank Loan</button>
+          <button class="opt" onclick="answer(this,'q2',false)">B. 銷貨收入 Sales Revenue</button>
+          <button class="opt" onclick="answer(this,'q2',true)">C. 應收帳款 Accounts Receivable</button>
+          <button class="opt" onclick="answer(this,'q2',false)">D. 股本 Capital Stock</button>
+        </div>
+        <div class="explain" id="exp-q2">✅ <strong>正確答案 C。</strong>應收帳款是資產科目，正常餘額在借方。銀行借款（負債）、銷貨收入（收入）、股本（權益）的正常餘額都在貸方。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q3 of 5</div>
+        <div class="q-text">Cash T字帳：借方合計 $500,000，貸方合計 $150,000，餘額是？</div>
+        <div class="q-sub">Cash T Account: Debit total $500,000, Credit total $150,000. What is the balance?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q3',false)">A. 貸方餘額 $350,000</button>
+          <button class="opt" onclick="answer(this,'q3',true)">B. 借方餘額 $350,000</button>
+          <button class="opt" onclick="answer(this,'q3',false)">C. 借方餘額 $650,000</button>
+          <button class="opt" onclick="answer(this,'q3',false)">D. 貸方餘額 $650,000</button>
+        </div>
+        <div class="explain" id="exp-q3">✅ <strong>正確答案 B。</strong>餘額 = 500,000 − 150,000 = 350,000。借方合計較大，餘額在借方。Cash 是資產，正常餘額在借方，符合預期。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q4 of 5</div>
+        <div class="q-text">「費用（Expense）」科目的正常餘額在哪一側？</div>
+        <div class="q-sub">Expense accounts have a normal balance on which side?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q4',true)">A. 借方（左側）Debit</button>
+          <button class="opt" onclick="answer(this,'q4',false)">B. 貸方（右側）Credit</button>
+          <button class="opt" onclick="answer(this,'q4',false)">C. 視情況而定</button>
+          <button class="opt" onclick="answer(this,'q4',false)">D. 兩側都有</button>
+        </div>
+        <div class="explain" id="exp-q4">✅ <strong>正確答案 A。</strong>費用和資產一樣，正常餘額在借方（左側）。口訣：借增資費——資產和費用借方增加。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q5 of 5</div>
+        <div class="q-text">T字帳的主要功能是什麼？</div>
+        <div class="q-sub">The main purpose of a T Account is to:</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q5',false)">A. 記錄交易的日期和摘要</button>
+          <button class="opt" onclick="answer(this,'q5',false)">B. 直接產生財務報表</button>
+          <button class="opt" onclick="answer(this,'q5',true)">C. 匯總每個科目的所有借貸記錄並計算餘額</button>
+          <button class="opt" onclick="answer(this,'q5',false)">D. 取代日記帳的功能</button>
+        </div>
+        <div class="explain" id="exp-q5">✅ <strong>正確答案 C。</strong>T字帳（分類帳的視覺工具）匯總每個科目的所有借貸記錄，方便計算餘額。日記帳負責依時間記錄；T字帳負責依科目彙整。</div>
+      </div>
+
+      <button class="reset-btn" onclick="resetQuiz()">🔄 重新作答 · Reset Quiz</button>
+      <div class="footer">V1.5 · Go Freight Accounting Onboarding</div>
+    </div><!-- /quiz -->
