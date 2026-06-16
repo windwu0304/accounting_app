@@ -1,0 +1,12 @@
+{
+  "name": "初級會計學",
+  "short_name": "會計101",
+  "start_url": "/accounting_app/",
+  "display": "standalone",
+  "background_color": "#4A2FA0",
+  "theme_color": "#4A2FA0",
+  "icons": [
+    { "src": "icon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
