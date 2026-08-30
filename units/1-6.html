@@ -105,11 +105,11 @@
     <div class="section" id="section-quiz">
       <div class="score-banner">
         <div class="score-label">本節得分 Score</div>
-        <div class="score-val" id="score-display">0 / 5</div>
+        <div class="score-val" id="score-display">0 / 8</div>
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q1 of 5</div>
+        <div class="q-num">Q1 of 8</div>
         <div class="q-text">哪一張報表呈現「某一時間點」的財務狀況？</div>
         <div class="q-sub">Which statement shows the financial position at a specific point in time?</div>
         <div class="opts">
@@ -122,7 +122,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q2 of 5</div>
+        <div class="q-num">Q2 of 8</div>
         <div class="q-text">四大報表的資料都來自哪裡？</div>
         <div class="q-sub">All four financial statements are generated from:</div>
         <div class="opts">
@@ -135,7 +135,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q3 of 5</div>
+        <div class="q-num">Q3 of 8</div>
         <div class="q-text">「這個月公司賺了多少錢？」應該看哪一張報表？</div>
         <div class="q-sub">"How much did the company earn this month?" — which statement answers this?</div>
         <div class="opts">
@@ -148,7 +148,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q4 of 5</div>
+        <div class="q-num">Q4 of 8</div>
         <div class="q-text">淨利潤（Net Income）會影響資產負債表上的哪個科目？</div>
         <div class="q-sub">Net Income increases which account on the Balance Sheet?</div>
         <div class="opts">
@@ -161,7 +161,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q5 of 5</div>
+        <div class="q-num">Q5 of 8</div>
         <div class="q-text">四大報表中，哪三張是「一段期間」的報表？</div>
         <div class="q-sub">Which statements cover "a period of time"? (Choose the most complete answer)</div>
         <div class="opts">
@@ -171,6 +171,45 @@
           <button class="opt" onclick="answer(this,'q5',false)">D. 全部四張都是</button>
         </div>
         <div class="explain" id="exp-q5">✅ <strong>正確答案 C。</strong>損益表、現金流量表、權益變動表都涵蓋一段期間。只有資產負債表是「某一時間點」。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q6 of 8</div>
+        <div class="q-text">甲公司X1年純益率為25%、總資產週轉率為3次，請問投資報酬率（ROA）為多少？</div>
+        <div class="q-sub">If net profit margin is 25% and total asset turnover is 3 times, what is ROA?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q6',false)">A. 8.33%</button>
+          <button class="opt" onclick="answer(this,'q6',true)">B. 75%</button>
+          <button class="opt" onclick="answer(this,'q6',false)">C. 12%</button>
+          <button class="opt" onclick="answer(this,'q6',false)">D. 28%</button>
+        </div>
+        <div class="explain" id="exp-q6">✅ <strong>正確答案 B。</strong>ROA＝純益率×總資產週轉率＝25%×3＝75%。這是杜邦分析公式：投資報酬率＝淨利/總資產＝（淨利/銷貨）×（銷貨/總資產）＝純益率×週轉率。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q7 of 8</div>
+        <div class="q-text">中華公司綜合損益表上有本期淨利$800,000，已知純益率為25%，所得稅率為20%，營業成本是營業費用的1.5倍，營業外收益貸餘$50,000。試問本期銷貨毛利為多少？</div>
+        <div class="q-sub">Given net income $800,000, profit margin 25%, tax rate 20%, operating costs 1.5x operating expenses, non-operating income $50,000, what is gross profit?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q7',false)">A. $1,730,000</button>
+          <button class="opt" onclick="answer(this,'q7',false)">B. $1,790,000</button>
+          <button class="opt" onclick="answer(this,'q7',true)">C. $1,850,000</button>
+          <button class="opt" onclick="answer(this,'q7',false)">D. $1,910,000</button>
+        </div>
+        <div class="explain" id="exp-q7">✅ <strong>正確答案 C。</strong>稅前淨利＝800,000÷(1-20%)=1,000,000。純益率25%→銷貨淨額＝800,000÷25%=3,200,000。營業利益＝稅前淨利-營業外收益＝1,000,000-50,000=950,000。設營業費用＝X，營業成本＝1.5X，毛利＝3,200,000-1.5X，營業利益＝毛利-X＝3,200,000-2.5X=950,000→X=900,000。毛利＝3,200,000-1,350,000=1,850,000。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q8 of 8</div>
+        <div class="q-text">葛飾企業資產總額$830,000，流動資產$200,000（現金$24,000、應收款項$75,000、存貨$90,000、預付款$11,000），流動負債$116,000，負債總額$373,500。下列分析何者錯誤？</div>
+        <div class="q-sub">Which financial ratio analysis is INCORRECT?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q8',false)">A. 速動比率為85.34%</button>
+          <button class="opt" onclick="answer(this,'q8',true)">B. 非流動資產為$530,000</button>
+          <button class="opt" onclick="answer(this,'q8',false)">C. 負債比率為45%</button>
+          <button class="opt" onclick="answer(this,'q8',false)">D. 流動比率為1.72</button>
+        </div>
+        <div class="explain" id="exp-q8">✅ <strong>正確答案 B。</strong>速動比率＝(24,000+75,000)÷116,000=85.34% ✓；流動比率＝200,000÷116,000=1.72 ✓；負債比率＝373,500÷830,000=45% ✓；非流動資產＝830,000-200,000=630,000（不是530,000），故B有誤，正確應為$630,000。</div>
       </div>
 
       <button class="reset-btn" onclick="resetQuiz()">🔄 重新作答 · Reset Quiz</button>

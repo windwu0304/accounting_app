@@ -1066,6 +1066,10 @@ function closeDrawer() {
 }
 
 /* ─── Quiz ─── */
+function quizTotal() {
+  var n = document.querySelectorAll('#section-quiz .quiz-card').length;
+  return n || 5;
+}
 function answer(btn, qid, correct) {
   if (scores[qid] !== undefined) return;
   var opts = btn.closest('.opts').querySelectorAll('.opt');
@@ -1082,12 +1086,12 @@ function answer(btn, qid, correct) {
   scores[qid] = correct ? 1 : 0;
   var total = Object.values(scores).reduce(function(a,b){ return a+b; }, 0);
   var disp = document.getElementById('score-display');
-  if (disp) disp.textContent = total + ' / 5';
+  if (disp) disp.textContent = total + ' / ' + quizTotal();
 }
 function resetQuiz() {
   scores = {};
   var disp = document.getElementById('score-display');
-  if (disp) disp.textContent = '0 / 5';
+  if (disp) disp.textContent = '0 / ' + quizTotal();
   document.querySelectorAll('.opt').forEach(function(o){
     o.classList.remove('correct','wrong','disabled');
   });

@@ -117,11 +117,11 @@
     <div class="section" id="section-quiz">
       <div class="score-banner">
         <div class="score-label">本節得分 Score</div>
-        <div class="score-val" id="score-display">0 / 5</div>
+        <div class="score-val" id="score-display">0 / 8</div>
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q1 of 5</div>
+        <div class="q-num">Q1 of 8</div>
         <div class="q-text">現金（Cash）增加，應記在帳戶哪一方？</div>
         <div class="q-sub">When Cash increases, it is recorded on which side?</div>
         <div class="opts">
@@ -134,7 +134,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q2 of 5</div>
+        <div class="q-num">Q2 of 8</div>
         <div class="q-text">銷貨收入（Sales Revenue）增加，應記在哪一方？</div>
         <div class="q-sub">When Sales Revenue increases, it is recorded on which side?</div>
         <div class="opts">
@@ -147,7 +147,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q3 of 5</div>
+        <div class="q-num">Q3 of 8</div>
         <div class="q-text">會計循環的第三步是？</div>
         <div class="q-sub">The THIRD step of the accounting cycle is:</div>
         <div class="opts">
@@ -160,7 +160,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q4 of 5</div>
+        <div class="q-num">Q4 of 8</div>
         <div class="q-text">「有借必有貸，借貸必相等」是哪種記帳方法的特性？</div>
         <div class="q-sub">"Every debit must have an equal credit" is a feature of:</div>
         <div class="opts">
@@ -173,7 +173,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q5 of 5</div>
+        <div class="q-num">Q5 of 8</div>
         <div class="q-text">應付帳款（Accounts Payable）減少，應記在哪一方？</div>
         <div class="q-sub">When Accounts Payable decreases, it is recorded on which side?</div>
         <div class="opts">
@@ -183,6 +183,45 @@
           <button class="opt" onclick="answer(this,'q5',false)">D. 不影響等式</button>
         </div>
         <div class="explain" id="exp-q5">✅ <strong>正確答案 B。</strong>應付帳款是負債科目，「貸增負權收」表示負債增加記貸方。反之，負債「減少」記借方。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q6 of 8</div>
+        <div class="q-text">下列借貸分錄何者「不成立」？</div>
+        <div class="q-sub">Which journal entry is INVALID under double-entry rules?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q6',false)">A. 資產增加（借）＋收益增加（貸）Asset↑ Dr. / Revenue↑ Cr.</button>
+          <button class="opt" onclick="answer(this,'q6',true)">B. 資產增加（借）＋負債減少（借）Asset↑ Dr. / Liability↓ Dr.</button>
+          <button class="opt" onclick="answer(this,'q6',false)">C. 資產增加（借）＋業主權益增加（貸）Asset↑ Dr. / Equity↑ Cr.</button>
+          <button class="opt" onclick="answer(this,'q6',false)">D. 費用增加（借）＋資產減少（貸）Expense↑ Dr. / Asset↓ Cr.</button>
+        </div>
+        <div class="explain" id="exp-q6">✅ <strong>正確答案 B。</strong>B選項兩邊都是借方，違反「有借必有貸，借貸必相等」。資產增加記借方、負債減少也記借方→借方兩筆，貸方空白，等式不平衡，分錄不成立。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q7 of 8</div>
+        <div class="q-text">調整前帳列預收租金$1,200，租金收入$300；今有一調整分錄「借：預收租金$600、貸：租金收入$600」，過帳時借貸方向錯誤（金額正確）。此過帳錯誤將使調整後試算表：</div>
+        <div class="q-sub">If the posting direction of an adjusting entry is reversed, how does it affect the trial balance totals?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q7',false)">A. 借貸方合計數不受影響</button>
+          <button class="opt" onclick="answer(this,'q7',false)">B. 借方無誤，貸方多計$1,200</button>
+          <button class="opt" onclick="answer(this,'q7',true)">C. 借貸方各多計$1,200</button>
+          <button class="opt" onclick="answer(this,'q7',false)">D. 借方多計$1,200，貸方無誤</button>
+        </div>
+        <div class="explain" id="exp-q7">✅ <strong>正確答案 C。</strong>正確應借：預收租金600（貸方科目借方記，減少600）；貸：租金收入600（貸方增加600）。若方向全反：借：租金收入600，貸：預收租金600。預收租金正確應-600，誤過為+600，差2×600=1,200，貸方多計1,200；租金收入正確應+600，誤過為-600，差1,200，借方多計1,200。故借貸方各多計$1,200。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q8 of 8</div>
+        <div class="q-text">會計循環中，下列步驟何者在「試算（Trial Balance）」之後進行？</div>
+        <div class="q-sub">Which step comes AFTER the Trial Balance in the accounting cycle?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q8',false)">A. 過帳 Posting</button>
+          <button class="opt" onclick="answer(this,'q8',false)">B. 分錄 Journalizing</button>
+          <button class="opt" onclick="answer(this,'q8',true)">C. 調整 Adjusting</button>
+          <button class="opt" onclick="answer(this,'q8',false)">D. 以上皆非</button>
+        </div>
+        <div class="explain" id="exp-q8">✅ <strong>正確答案 C。</strong>會計循環：分→過→試→調→結→編。試算（Trial Balance）確認借貸平衡後，才進行調整分錄（Adjusting），補記跨期或漏記的項目，再結帳、編表。</div>
       </div>
 
       <button class="reset-btn" onclick="resetQuiz()">🔄 重新作答 · Reset Quiz</button>
