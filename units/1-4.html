@@ -93,11 +93,11 @@
     <div class="section" id="section-quiz">
       <div class="score-banner">
         <div class="score-label">本節得分 Score</div>
-        <div class="score-val" id="score-display">0 / 5</div>
+        <div class="score-val" id="score-display">0 / 8</div>
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q1 of 5</div>
+        <div class="q-num">Q1 of 8</div>
         <div class="q-text">「應付帳款（Accounts Payable）」屬於哪類科目？</div>
         <div class="q-sub">Accounts Payable belongs to which category?</div>
         <div class="opts">
@@ -110,7 +110,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q2 of 5</div>
+        <div class="q-num">Q2 of 8</div>
         <div class="q-text">哪一張財務報表顯示「某一時間點」的財務狀況？</div>
         <div class="q-sub">Which statement shows financial position at a SPECIFIC point in time?</div>
         <div class="opts">
@@ -123,7 +123,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q3 of 5</div>
+        <div class="q-num">Q3 of 8</div>
         <div class="q-text">「銷貨收入（Sales Revenue）」屬於哪個要素？</div>
         <div class="q-sub">Sales Revenue belongs to which accounting element?</div>
         <div class="opts">
@@ -136,7 +136,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q4 of 5</div>
+        <div class="q-num">Q4 of 8</div>
         <div class="q-text">「保留盈餘（Retained Earnings）」屬於哪類科目？</div>
         <div class="q-sub">Retained Earnings belongs to which category?</div>
         <div class="opts">
@@ -149,7 +149,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q5 of 5</div>
+        <div class="q-num">Q5 of 8</div>
         <div class="q-text">綜合損益表（Income Statement）主要呈現？</div>
         <div class="q-sub">The Income Statement primarily presents:</div>
         <div class="opts">
@@ -159,6 +159,45 @@
           <button class="opt" onclick="answer(this,'q5',true)">D. 收入與費用 Revenue and Expenses</button>
         </div>
         <div class="explain" id="exp-q5">✅ <strong>正確答案 D。</strong>綜合損益表呈現一段期間的收入（Revenue）與費用（Expense），計算出利潤（Profit）。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q6 of 8</div>
+        <div class="q-text">下列科目何者出現在「資產負債表」而非「綜合損益表」？</div>
+        <div class="q-sub">Which account appears on the Balance Sheet, NOT the Income Statement?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q6',false)">A. 薪資費用 Salary Expense</button>
+          <button class="opt" onclick="answer(this,'q6',false)">B. 銷貨收入 Sales Revenue</button>
+          <button class="opt" onclick="answer(this,'q6',true)">C. 應收帳款 Accounts Receivable</button>
+          <button class="opt" onclick="answer(this,'q6',false)">D. 租金費用 Rent Expense</button>
+        </div>
+        <div class="explain" id="exp-q6">✅ <strong>正確答案 C。</strong>應收帳款是資產科目，出現在資產負債表。薪資費用、租金費用是費用科目；銷貨收入是收入科目，兩者都出現在綜合損益表。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q7 of 8</div>
+        <div class="q-text">甲公司本期銷貨收入$800,000、銷貨成本$480,000、營業費用$120,000、利息收入$20,000、利息費用$30,000。請問本期「銷貨毛利」及「本期淨利」各為多少？</div>
+        <div class="q-sub">What are the gross profit and net income?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q7',true)">A. 毛利$320,000；淨利$190,000</button>
+          <button class="opt" onclick="answer(this,'q7',false)">B. 毛利$320,000；淨利$170,000</button>
+          <button class="opt" onclick="answer(this,'q7',false)">C. 毛利$300,000；淨利$190,000</button>
+          <button class="opt" onclick="answer(this,'q7',false)">D. 毛利$300,000；淨利$170,000</button>
+        </div>
+        <div class="explain" id="exp-q7">✅ <strong>正確答案 A。</strong>毛利＝800,000-480,000=320,000。淨利＝320,000-120,000（營業費用）+20,000（利息收入）-30,000（利息費用）=190,000。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q8 of 8</div>
+        <div class="q-text">下列關於四大財務報表編製「順序」的敘述，何者正確？</div>
+        <div class="q-sub">What is the correct order for preparing the four financial statements?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q8',false)">A. 資產負債表→損益表→權益變動表→現金流量表</button>
+          <button class="opt" onclick="answer(this,'q8',false)">B. 損益表→資產負債表→權益變動表→現金流量表</button>
+          <button class="opt" onclick="answer(this,'q8',true)">C. 損益表→權益變動表→資產負債表→現金流量表</button>
+          <button class="opt" onclick="answer(this,'q8',false)">D. 現金流量表→損益表→權益變動表→資產負債表</button>
+        </div>
+        <div class="explain" id="exp-q8">✅ <strong>正確答案 C。</strong>正確順序：①損益表（算出淨利）→②權益變動表（淨利影響權益）→③資產負債表（權益數字確定後才能完成）→④現金流量表（最後編製）。損益表的淨利是後續報表的輸入值。</div>
       </div>
 
       <button class="reset-btn" onclick="resetQuiz()">🔄 重新作答 · Reset Quiz</button>

@@ -103,11 +103,11 @@
     <div class="section" id="section-quiz">
       <div class="score-banner">
         <div class="score-label">本節得分 Score</div>
-        <div class="score-val" id="score-display">0 / 5</div>
+        <div class="score-val" id="score-display">0 / 8</div>
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q1 of 5</div>
+        <div class="q-num">Q1 of 8</div>
         <div class="q-text">下列哪一項「不需要」記入帳本？</div>
         <div class="q-sub">Which of the following does NOT need to be recorded in accounting?</div>
         <div class="opts">
@@ -120,7 +120,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q2 of 5</div>
+        <div class="q-num">Q2 of 8</div>
         <div class="q-text">「將資料集合加總」描述的是哪個步驟？</div>
         <div class="q-sub">"Aggregating data into totals" describes which accounting step?</div>
         <div class="opts">
@@ -133,7 +133,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q3 of 5</div>
+        <div class="q-num">Q3 of 8</div>
         <div class="q-text">六大程序中，第「三」個步驟是？</div>
         <div class="q-sub">What is the THIRD step in the accounting process?</div>
         <div class="opts">
@@ -146,7 +146,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q4 of 5</div>
+        <div class="q-num">Q4 of 8</div>
         <div class="q-text">「決定這件交易值多少錢」屬於哪個步驟？</div>
         <div class="q-sub">"Determining the monetary value of a transaction" belongs to which step?</div>
         <div class="opts">
@@ -159,7 +159,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q5 of 5</div>
+        <div class="q-num">Q5 of 8</div>
         <div class="q-text">六大程序中，最後一個步驟是？</div>
         <div class="q-sub">What is the LAST step in the accounting process?</div>
         <div class="opts">
@@ -169,6 +169,45 @@
           <button class="opt" onclick="answer(this,'q5',true)">D. 分析 Analysis</button>
         </div>
         <div class="explain" id="exp-q5">✅ <strong>正確答案 D。</strong>六大程序最後一步是分析（Analysis），利用財務資訊協助管理層做決策。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q6 of 8</div>
+        <div class="q-text">菜鳥會計阿寧，過帳後發現餘額式試算表借貸合計數不平，下列會計處理錯誤中，「不可能」造成借貸不平者有幾項？①記帳時借貸數字同時錯位 ②過帳時只過了借方 ③日記帳漏記一筆交易 ④貸記租金收入過帳誤過為服務收入 ⑤個別帳戶餘額結算錯誤</div>
+        <div class="q-sub">Which of the following errors would NOT cause the trial balance to be unequal?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q6',false)">A. 一項</button>
+          <button class="opt" onclick="answer(this,'q6',false)">B. 二項</button>
+          <button class="opt" onclick="answer(this,'q6',true)">C. 三項</button>
+          <button class="opt" onclick="answer(this,'q6',false)">D. 四項</button>
+        </div>
+        <div class="explain" id="exp-q6">✅ <strong>正確答案 C。</strong>①借貸同時錯位→兩邊同增同減→不影響平衡；③漏記整筆→兩邊同時少→不影響平衡；④科目錯誤但金額正確→借貸仍平衡。只有②和⑤會造成不平衡，故不影響者共三項（①③④）。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q7 of 8</div>
+        <div class="q-text">下列何者屬於「辨認」步驟中「不需要記帳」的事項？</div>
+        <div class="q-sub">Which of the following does NOT qualify for accounting recognition?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q7',false)">A. 向銀行借款$500,000<small>Borrowing $500,000 from a bank</small></button>
+          <button class="opt" onclick="answer(this,'q7',false)">B. 購買辦公室設備$80,000<small>Purchasing office equipment for $80,000</small></button>
+          <button class="opt" onclick="answer(this,'q7',true)">C. 老闆今天心情很好，激勵員工士氣<small>The boss is in a good mood and boosts morale</small></button>
+          <button class="opt" onclick="answer(this,'q7',false)">D. 支付員工薪資$150,000<small>Paying employee salaries of $150,000</small></button>
+        </div>
+        <div class="explain" id="exp-q7">✅ <strong>正確答案 C。</strong>辨認的關鍵：能否以金額衡量？老闆心情好無法用貨幣表示，不符合會計記錄條件。其他三項均有具體金額，需要記帳。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q8 of 8</div>
+        <div class="q-text">下列對六大程序「順序」的描述，何者正確？</div>
+        <div class="q-sub">Which correctly describes the order of the six-step accounting process?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q8',false)">A. 記錄→辨認→衡量→分類→彙總→分析</button>
+          <button class="opt" onclick="answer(this,'q8',false)">B. 辨認→衡量→記錄→彙總→分類→分析</button>
+          <button class="opt" onclick="answer(this,'q8',true)">C. 辨認→衡量→記錄→分類→彙總→分析</button>
+          <button class="opt" onclick="answer(this,'q8',false)">D. 衡量→辨認→記錄→分類→彙總→分析</button>
+        </div>
+        <div class="explain" id="exp-q8">✅ <strong>正確答案 C。</strong>六大程序固定順序：辨認→衡量→記錄→分類→彙總→分析。「分類」在「記錄」之後，「彙總」在「分類」之後，順序不可顛倒。</div>
       </div>
 
       <button class="reset-btn" onclick="resetQuiz()">🔄 重新作答 · Reset Quiz</button>

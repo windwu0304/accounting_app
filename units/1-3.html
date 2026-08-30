@@ -108,11 +108,11 @@
     <div class="section" id="section-quiz">
       <div class="score-banner">
         <div class="score-label">本節得分 Score</div>
-        <div class="score-val" id="score-display">0 / 5</div>
+        <div class="score-val" id="score-display">0 / 8</div>
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q1 of 5</div>
+        <div class="q-num">Q1 of 8</div>
         <div class="q-text">下列何者屬於「資產」？</div>
         <div class="q-sub">Which of the following is an "Asset"?</div>
         <div class="opts">
@@ -125,7 +125,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q2 of 5</div>
+        <div class="q-num">Q2 of 8</div>
         <div class="q-text">「公司欠別人的錢」屬於哪個要素？</div>
         <div class="q-sub">"Money the company owes to others" belongs to which element?</div>
         <div class="opts">
@@ -138,7 +138,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q3 of 5</div>
+        <div class="q-num">Q3 of 8</div>
         <div class="q-text">會計恆等式 A = L + E 中，E 代表什麼？</div>
         <div class="q-sub">In the equation A = L + E, what does E represent?</div>
         <div class="opts">
@@ -151,7 +151,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q4 of 5</div>
+        <div class="q-num">Q4 of 8</div>
         <div class="q-text">利潤（Profit）的計算公式是？</div>
         <div class="q-sub">The formula for Profit is:</div>
         <div class="opts">
@@ -164,7 +164,7 @@
       </div>
 
       <div class="quiz-card">
-        <div class="q-num">Q5 of 5</div>
+        <div class="q-num">Q5 of 8</div>
         <div class="q-text">下列哪個要素屬於「損益表」而非「資產負債表」？</div>
         <div class="q-sub">Which element appears on the Income Statement, not the Balance Sheet?</div>
         <div class="opts">
@@ -174,6 +174,45 @@
           <button class="opt" onclick="answer(this,'q5',true)">D. 費用 Expense</button>
         </div>
         <div class="explain" id="exp-q5">✅ <strong>正確答案 D。</strong>費用（Expense）和收入（Revenue）出現在損益表。資產、負債、權益出現在資產負債表。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q6 of 8</div>
+        <div class="q-text">台北公司有下列五筆交易：①股東投資$200,000；②向銀行借款$300,000；③購買設備$100,000（付現）；④銷售商品$150,000（賒銷）；⑤支付薪資$50,000。請問五筆交易後，資產總額為多少？</div>
+        <div class="q-sub">After the five transactions above, what is the total assets?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q6',false)">A. $450,000</button>
+          <button class="opt" onclick="answer(this,'q6',false)">B. $500,000</button>
+          <button class="opt" onclick="answer(this,'q6',false)">C. $550,000</button>
+          <button class="opt" onclick="answer(this,'q6',true)">D. $600,000</button>
+        </div>
+        <div class="explain" id="exp-q6">✅ <strong>正確答案 D。</strong>①股東投資：A+200,000, E+200,000；②銀行借款：A+300,000, L+300,000；③購買設備付現：設備+100,000、現金-100,000，屬資產內部互換，總額不變；④賒銷：AR+150,000, R+150,000；⑤支付薪資：A-50,000, X+50,000。資產總額變化＝200,000+300,000+0+150,000-50,000=600,000。驗證等式：A(600,000)=L(300,000)+E(200,000)+R(150,000)-X(50,000)=600,000 ✅</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q7 of 8</div>
+        <div class="q-text">下列何者會使「權益（Equity）」增加？</div>
+        <div class="q-sub">Which of the following increases Equity?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q7',false)">A. 支付銀行借款利息<small>Paying interest on bank loan</small></button>
+          <button class="opt" onclick="answer(this,'q7',false)">B. 股東提取現金自用<small>Owner withdraws cash</small></button>
+          <button class="opt" onclick="answer(this,'q7',true)">C. 本期發生銷貨收入<small>Recording sales revenue</small></button>
+          <button class="opt" onclick="answer(this,'q7',false)">D. 發生薪資費用<small>Incurring salary expense</small></button>
+        </div>
+        <div class="explain" id="exp-q7">✅ <strong>正確答案 C。</strong>收入（Revenue）最終增加權益（Equity）。利息和薪資是費用，會減少權益。股東提款直接減少權益。A=L+E+R-X，收入增加使右側增加，權益隨之增加。</div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="q-num">Q8 of 8</div>
+        <div class="q-text">乙公司期初資產$500,000、負債$200,000。本期收入$300,000、費用$180,000、股東增資$50,000、股東提款$30,000。請問期末權益為多少？</div>
+        <div class="q-sub">What is the ending equity?</div>
+        <div class="opts">
+          <button class="opt" onclick="answer(this,'q8',false)">A. $320,000</button>
+          <button class="opt" onclick="answer(this,'q8',false)">B. $340,000</button>
+          <button class="opt" onclick="answer(this,'q8',false)">C. $360,000</button>
+          <button class="opt" onclick="answer(this,'q8',true)">D. $440,000</button>
+        </div>
+        <div class="explain" id="exp-q8">✅ <strong>正確答案 D。</strong>期初權益＝500,000-200,000=300,000。本期淨利＝300,000-180,000=120,000。期末權益＝300,000+120,000+50,000-30,000=440,000。</div>
       </div>
 
       <button class="reset-btn" onclick="resetQuiz()">🔄 重新作答 · Reset Quiz</button>
